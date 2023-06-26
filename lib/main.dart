@@ -1,13 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_handbook_of_superheroes/firebase_options.dart';
 import 'package:the_handbook_of_superheroes/screens/home_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   EasyLoading.instance
     ..errorWidget = const Icon(Ionicons.warning)

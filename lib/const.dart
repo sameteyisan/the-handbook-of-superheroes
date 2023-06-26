@@ -1,3 +1,3 @@
 class Const {
-  static const apiUrl = "https://superheroapi.com/api/2570307793150377";
+  static const apiUrl = "https://superheroapi.com/api/10167700845705177";
 }

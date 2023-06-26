@@ -33,8 +33,8 @@ class AppearanceModel {
     return AppearanceModel(
       gender: map['gender'] ?? '',
       race: map['race'] ?? '',
-      height: List<String>.from(map['height']).join(" - "),
-      weight: List<String>.from(map['weight']).join(" - "),
+      height: map['height'] ?? '', // List<String>.from(map['height']).join(" - "),
+      weight: map['weight'] ?? '', // List<String>.from(map['weight']).join(" - "),
       eyeColor: map['eye-color'] ?? '',
       hairColor: map['hair-color'] ?? '',
     );

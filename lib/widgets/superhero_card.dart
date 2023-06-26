@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_handbook_of_superheroes/models/superhero.dart';
+import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_ink_well.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
@@ -8,7 +8,7 @@ import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 class SuperheroCard extends StatelessWidget {
   const SuperheroCard({super.key, required this.superhero, this.onTap});
 
-  final SuperheroModel superhero;
+  final BasicHeroModel superhero;
   final Function()? onTap;
 
   @override
@@ -17,7 +17,7 @@ class SuperheroCard extends StatelessWidget {
       onTap: onTap,
       child: Stack(
         children: [
-          CustomNetworkImage(url: superhero.image.url),
+          Hero(tag: "hero-${superhero.id}", child: CustomNetworkImage(url: superhero.url)),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
