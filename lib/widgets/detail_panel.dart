@@ -43,7 +43,11 @@ class DetailPanel extends StatelessWidget {
                 ),
                 child: kv.value is List
                     ? Text(kv.value.join("\n"))
-                    : Text(kv.value == "null" ? "Unknown" : kv.value),
+                    : Text(kv.value == "null"
+                        ? "Unknown"
+                        : kv.value == ""
+                            ? "-"
+                            : kv.value),
               ),
             ),
           ],

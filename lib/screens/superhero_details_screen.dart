@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_handbook_of_superheroes/models/superhero.dart';
+import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 import 'package:the_handbook_of_superheroes/widgets/detail_panel.dart';
 import 'package:the_handbook_of_superheroes/widgets/title_widget.dart';
@@ -12,6 +13,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const CustomBackButton(),
         title: Text(superhero.name),
       ),
       body: ListView(

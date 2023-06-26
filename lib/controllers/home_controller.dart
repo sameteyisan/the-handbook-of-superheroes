@@ -14,19 +14,26 @@ class HomeController extends GetxController {
 
   final searchText = "".obs;
 
-  final CancelToken canceler = CancelToken();
+  CancelToken? canceler;
 
   @override
   void onInit() async {
     searchController.addListener(listener);
 
     ever(searchText, (name) async {
-      if (searchText.value.isEmpty) {
+      isLoading.value = true;
+      if (name.isEmpty) {
+        superheroes.clear();
         isLoading.value = false;
         return;
       }
-      isLoading.value = true;
-      superheroes.value = await Api.getSuperheros(name, canceler);
+      canceler?.cancel();
+      canceler = CancelToken();
+      final res = await Api.getSuperheros(name, canceler!);
+      if (res == null) {
+        return;
+      }
+      superheroes.value = res;
       isLoading.value = false;
     });
 
@@ -42,7 +49,7 @@ class HomeController extends GetxController {
     searchController.removeListener(listener);
 
     searchController.dispose();
-    canceler.cancel();
+    canceler?.cancel();
     super.onClose();
   }
 

@@ -33,7 +33,7 @@ class Api {
     }
   }
 
-  static Future<List<SuperheroModel>> getSuperheros(String name, CancelToken canceler) async {
+  static Future<List<SuperheroModel>?> getSuperheros(String name, CancelToken canceler) async {
     try {
       final dio = await Api.dioAuth();
       Response response = await dio.get("/search/$name", cancelToken: canceler);
@@ -43,6 +43,9 @@ class Api {
       }
       return [];
     } catch (e) {
+      if (canceler.isCancelled) {
+        return null;
+      }
       debugPrint('Get Superheros Error : $e');
       return [];
     }

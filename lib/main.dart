@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         title: "The Handbook of Superheroes",
         themeMode: ThemeMode.dark,
         theme: ThemeData(
+          useMaterial3: true,
           appBarTheme: AppBarTheme(
             centerTitle: true,
             backgroundColor: CColors.mainColor,
