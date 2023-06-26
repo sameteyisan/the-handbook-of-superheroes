@@ -76,7 +76,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Ink(
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(16),
@@ -96,7 +96,7 @@ class CustomTextField extends StatelessWidget {
         expands: expand,
         minLines: minLine,
         maxLines: maxline,
-        textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+        textCapitalization: textCapitalization ?? TextCapitalization.none,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         initialValue: initialValue,
         controller: controller,

@@ -3,8 +3,8 @@ import 'dart:convert';
 class AppearanceModel {
   final String gender;
   final String race;
-  final List<String> height;
-  final List<String> weight;
+  final String height;
+  final String weight;
   final String eyeColor;
   final String hairColor;
   AppearanceModel({
@@ -33,8 +33,8 @@ class AppearanceModel {
     return AppearanceModel(
       gender: map['gender'] ?? '',
       race: map['race'] ?? '',
-      height: List<String>.from(map['height']),
-      weight: List<String>.from(map['weight']),
+      height: List<String>.from(map['height']).join(" - "),
+      weight: List<String>.from(map['weight']).join(" - "),
       eyeColor: map['eye-color'] ?? '',
       hairColor: map['hair-color'] ?? '',
     );

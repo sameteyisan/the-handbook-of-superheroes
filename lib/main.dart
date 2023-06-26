@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.dark,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
+            centerTitle: true,
             backgroundColor: CColors.mainColor,
             titleTextStyle: Styles.title,
           ),

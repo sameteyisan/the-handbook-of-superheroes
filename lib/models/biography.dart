@@ -34,7 +34,7 @@ class BiograpyModel {
 
   factory BiograpyModel.fromMap(Map<String, dynamic> map) {
     return BiograpyModel(
-      fullname: map['fullname'] ?? '',
+      fullname: map['full-name'] ?? '',
       alterEgos: map['alter-egos'] ?? '',
       aliases: List<String>.from(map['aliases']),
       placeOfBirth: map['place-of-birth'] ?? '',

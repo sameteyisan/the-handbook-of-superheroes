@@ -10,12 +10,7 @@ class CColors {
 
   static const darkSubtitle = Color(0xff92928E);
   static const borderColor = Color(0xff335373);
-  static const sideColor = Color(0x4cb7b7b3);
-  static const panelColor = Color(0x1E1F3353);
-  static const black = Colors.black;
-  static const red = Colors.red;
   static const white = Colors.white;
-  static const blue = Color(0xff4267B2);
 
   static const Map<int, Color> primarySwatchColors = {
     50: Color.fromRGBO(58, 166, 185, .1),
@@ -37,5 +32,10 @@ class Styles {
   static TextStyle get title => TextStyle(
         fontSize: 19.sp,
         fontWeight: FontWeight.w500,
+      );
+
+  static TextStyle get bigTitle => TextStyle(
+        fontSize: 23.sp,
+        fontWeight: FontWeight.bold,
       );
 }
