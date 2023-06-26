@@ -82,8 +82,7 @@ class Api {
       //   return superheroes.map((e) => SuperheroModel.fromMap(e)).toList();
       // }
       // return [];
-    } catch (e, stacktrace) {
-      print(stacktrace);
+    } catch (e) {
       // if (canceler != null && canceler.isCancelled) {
       //   return null;
       // }

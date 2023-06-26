@@ -1,14 +1,19 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
-import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
+import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
+import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
+import 'package:the_handbook_of_superheroes/widgets/superhero_tile.dart';
 import 'package:the_handbook_of_superheroes/widgets/text_field.dart';
 import 'package:the_handbook_of_superheroes/widgets/title_widget.dart';
 
@@ -46,6 +51,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 onFieldSubmitted: (_) => controller.search(),
               ),
+              const SizedBox(height: 32),
               Expanded(
                 child: Obx(
                   () => controller.isLoading.value
@@ -74,9 +80,8 @@ class HomeScreen extends StatelessWidget {
                               ],
                             )
                           : controller.superheroes.isEmpty
-                              ? Column(
+                              ? ListView(
                                   children: [
-                                    const SizedBox(height: 32),
                                     const TitleWidget("Featured Superheroes"),
                                     const SizedBox(height: 16),
                                     Obx(
@@ -93,11 +98,7 @@ class HomeScreen extends StatelessWidget {
                                               controller.currentCenter.value = index,
                                         ),
                                         items: controller.featuredHeroes
-                                            .map((e) => SuperheroCard(
-                                                  superhero: e,
-                                                  onTap: () =>
-                                                      Get.to(SuperheroesDetailsScreen(hero: e)),
-                                                ))
+                                            .map((e) => SuperheroCard(superhero: e))
                                             .toList(),
                                       ),
                                     ),
@@ -119,7 +120,52 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 32),
-                                    const TitleWidget("Last Heroes you viewed")
+                                    TitleWidget(
+                                      "Last Heroes you viewed",
+                                      more: "See All",
+                                      onTap: () => Get.to(const LastHeroesScreen()),
+                                    ),
+                                    ValueListenableBuilder(
+                                      valueListenable: Hive.box("last-heroes").listenable(),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(height: 32),
+                                          const Icon(Ionicons.eye_outline),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            "The superheroes you last visited are displayed here.",
+                                            style: Styles.title.copyWith(fontSize: 17.sp),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ),
+                                      builder: (context, box, child) {
+                                        if (box.isEmpty) {
+                                          return child!;
+                                        }
+                                        return ListView(
+                                          padding: const EdgeInsets.symmetric(vertical: 16),
+                                          physics: const BouncingScrollPhysics(),
+                                          shrinkWrap: true,
+                                          reverse: true,
+                                          children: box.keys
+                                              .toList()
+                                              .sublist(0, min(box.keys.length, 3))
+                                              .map(
+                                            (key) {
+                                              final superhero =
+                                                  BasicHeroModel.fromJson(box.get(key));
+
+                                              return Padding(
+                                                padding: const EdgeInsets.only(bottom: 8),
+                                                child: SuperheroTile(superhero: superhero),
+                                              );
+                                            },
+                                          ).toList(),
+                                        );
+                                      },
+                                    ),
                                   ],
                                 )
                               : GridView.count(
@@ -130,15 +176,9 @@ class HomeScreen extends StatelessWidget {
                                   children: controller.superheroes
                                       .map(
                                         (superhero) => SuperheroCard(
-                                            superhero: superhero,
-                                            onTap: () {
-                                              FocusScope.of(context).unfocus();
-                                              Get.to(
-                                                SuperheroesDetailsScreen(
-                                                  hero: superhero,
-                                                ),
-                                              );
-                                            }),
+                                          superhero: superhero,
+                                          extraOnTap: FocusScope.of(context).unfocus,
+                                        ),
                                       )
                                       .toList(),
                                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/firebase_options.dart';
 import 'package:the_handbook_of_superheroes/screens/home_screen.dart';
@@ -18,6 +19,10 @@ void main() async {
   EasyLoading.instance
     ..errorWidget = const Icon(Ionicons.warning)
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle;
+
+  await Hive.initFlutter();
+  await Hive.openBox("last-heroes");
+
   runApp(const MyApp());
 }
 

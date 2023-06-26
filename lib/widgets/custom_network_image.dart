@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 
 class CustomNetworkImage extends StatelessWidget {
-  const CustomNetworkImage({super.key, required this.url, this.size});
+  const CustomNetworkImage({super.key, required this.url, this.size, this.borderRadius});
   final String url;
   final double? size;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,10 @@ class CustomNetworkImage extends StatelessWidget {
       cache: true,
       border: Border.all(color: CColors.borderColor, width: 0.1),
       shape: BoxShape.rectangle,
-      borderRadius: const BorderRadius.all(
-        Radius.circular(24),
-      ),
+      borderRadius: borderRadius ??
+          const BorderRadius.all(
+            Radius.circular(24),
+          ),
     );
   }
 }
