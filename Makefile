@@ -4,6 +4,8 @@ icon:
 	flutter pub run flutter_launcher_icons:main
 
 apk:
+	flutter clean 
+	flutter pub get
 	flutter build apk --split-per-abi
 	
 iosfix:
