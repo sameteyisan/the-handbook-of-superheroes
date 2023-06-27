@@ -6,12 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:lottie/lottie.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
-import 'package:the_handbook_of_superheroes/widgets/empty_last_heroes.dart';
+import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_tile.dart';
@@ -62,30 +61,9 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: Obx(
                   () => controller.isLoading.value
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Lottie.asset("assets/lotties/batman.json", width: Get.width * 0.4),
-                            const SizedBox(height: 16),
-                            Text(
-                              "Loading heroes matching the search result...",
-                              style: Styles.title.copyWith(fontSize: 17.sp),
-                            ),
-                          ],
-                        )
+                      ? const EmptyWidget(text: "Loading heroes matching the search result...")
                       : controller.superheroes.isEmpty && controller.isSearching.value
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset("assets/lotties/superhero.json",
-                                    width: Get.width * 0.4),
-                                const SizedBox(height: 16),
-                                Text(
-                                  "No hero found.",
-                                  style: Styles.title.copyWith(fontSize: 17.sp),
-                                ),
-                              ],
-                            )
+                          ? const EmptyWidget(url: "superhero", text: "No hero found.")
                           : controller.superheroes.isEmpty
                               ? ListView(
                                   children: [
@@ -134,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     ValueListenableBuilder(
                                       valueListenable: Hive.box("last-heroes").listenable(),
-                                      child: const EmptyLastHeroes(),
+                                      child: const EmptyWidget(),
                                       builder: (context, box, child) {
                                         if (box.isEmpty) {
                                           return child!;

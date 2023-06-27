@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/last_heroes_controller.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
-import 'package:the_handbook_of_superheroes/widgets/empty_last_heroes.dart';
+import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_tile.dart';
 
 class LastHeroesScreen extends StatelessWidget {
@@ -36,7 +36,7 @@ class LastHeroesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Obx(
           () => controller.heroes.isEmpty
-              ? const EmptyLastHeroes()
+              ? const EmptyWidget()
               : ListView(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   physics: const BouncingScrollPhysics(),

@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 
-class EmptyLastHeroes extends StatelessWidget {
-  const EmptyLastHeroes({super.key});
+class EmptyWidget extends StatelessWidget {
+  const EmptyWidget({super.key, this.url, this.text});
+  final String? url;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,13 @@ class EmptyLastHeroes extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Lottie.asset(
-          "assets/lotties/batman.json",
+          url ?? "assets/lotties/$url.json",
           width: Get.width * 0.4,
           repeat: false,
         ),
         const SizedBox(height: 16),
         Text(
-          "The superheroes you last visited are displayed here.",
+          text ?? "The superheroes you last visited are displayed here.",
           style: Styles.title.copyWith(fontSize: 17.sp),
           textAlign: TextAlign.center,
         ),

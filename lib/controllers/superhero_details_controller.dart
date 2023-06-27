@@ -10,10 +10,14 @@ class SuperheroDetailsController extends GetxController {
   String id;
   SuperheroDetailsController(this.id);
   @override
-  void onInit() async {
+  void onInit() {
+    fetch();
+    super.onInit();
+  }
+
+  void fetch() async {
     isLoading.value = true;
     superhero.value = await Api.getSuperheroDetails(id);
     isLoading.value = false;
-    super.onInit();
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/controllers/superhero_details_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
+import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/center_loading.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 import 'package:the_handbook_of_superheroes/widgets/detail_panel.dart';
@@ -25,9 +28,30 @@ class SuperheroesDetailsScreen extends StatelessWidget {
         children: [
           Center(child: Hero(tag: "hero-${hero.id}", child: CustomNetworkImage(url: hero.url))),
           Obx(() => controller.isLoading.value
-              ? const Center(child: CircularProgressIndicator())
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 32),
+                  child: CenterLoading(),
+                )
               : controller.superhero.value == null
-                  ? const Text("Something went wrong")
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 32),
+                        child: Column(
+                          children: [
+                            Text(
+                              "The information is currently inaccessible. Why don't we try again?",
+                              style: Styles.title.copyWith(fontSize: 17.sp),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 8),
+                            ElevatedButton(
+                              onPressed: controller.fetch,
+                              child: const Text("Try Again"),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   : Column(
                       children: [
                         const Padding(
