@@ -52,7 +52,7 @@ class FeaturedController extends GetxController {
   void addOrRemove(BasicHeroModel hero, bool isHave) async {
     if (isHave) {
       final res = await YesNoModal.open(
-          "This superhero is already in the spotlight. You want to take it out?");
+          "This superhero is already in the featured ones. You want to take it out?");
       if (res != null) {
         featured.removeWhere((e) => e.id == hero.id);
       }
