@@ -24,6 +24,7 @@ class TitleWidget extends StatelessWidget {
             onPressed: onTap,
             child: Text(
               more!,
+              style: const TextStyle(color: CColors.subtitleColor),
             ),
           )
       ],

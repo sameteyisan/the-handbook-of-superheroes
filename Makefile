@@ -1,3 +1,6 @@
+run:
+	flutter run --no-enable-impeller
+
 icon:
 	flutter clean
 	flutter pub get

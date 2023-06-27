@@ -10,7 +10,7 @@ class CustomBackButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(
         Icons.chevron_left_outlined,
-        color: CColors.cardColor,
+        color: CColors.textColor,
         size: 32,
       ),
       onPressed: Get.back,

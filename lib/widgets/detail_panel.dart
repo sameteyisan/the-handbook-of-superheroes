@@ -20,13 +20,16 @@ class DetailPanel extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: CColors.dialogColor.withOpacity(0.6),
+                  color: CColors.iconColor.withOpacity(0.5),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
                     bottomLeft: Radius.circular(8),
                   ),
                 ),
-                child: Text(kv.key.formatKey),
+                child: Text(
+                  kv.key.formatKey,
+                  style: const TextStyle(color: CColors.textColor),
+                ),
               ),
             ),
             Expanded(
@@ -35,19 +38,22 @@ class DetailPanel extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: CColors.dialogColor,
+                  color: CColors.foregroundBlack,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(8),
                     bottomRight: Radius.circular(8),
                   ),
                 ),
-                child: kv.value is List
-                    ? Text(kv.value.join("\n"))
-                    : Text(kv.value == "null"
-                        ? "Unknown"
-                        : kv.value == ""
-                            ? "-"
-                            : kv.value),
+                child: Text(
+                  kv.value is List
+                      ? kv.value.join("\n")
+                      : kv.value == "null"
+                          ? "Unknown"
+                          : kv.value == ""
+                              ? "-"
+                              : kv.value,
+                  style: const TextStyle(color: CColors.white),
+                ),
               ),
             ),
           ],

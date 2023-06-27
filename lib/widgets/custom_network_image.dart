@@ -17,7 +17,7 @@ class CustomNetworkImage extends StatelessWidget {
       height: (size ?? Get.width * 0.62).w,
       fit: BoxFit.cover,
       cache: true,
-      border: Border.all(color: CColors.borderColor, width: 0.1),
+      border: Border.all(color: CColors.iconColor, width: 0.1),
       shape: BoxShape.rectangle,
       borderRadius: borderRadius ??
           const BorderRadius.all(

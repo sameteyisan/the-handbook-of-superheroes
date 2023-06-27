@@ -42,10 +42,11 @@ class MyApp extends StatelessWidget {
         title: "The Handbook of Superheroes",
         themeMode: ThemeMode.dark,
         theme: ThemeData(
+          scaffoldBackgroundColor: CColors.backgroundcolor,
           useMaterial3: true,
           appBarTheme: AppBarTheme(
             centerTitle: true,
-            backgroundColor: CColors.mainColor,
+            backgroundColor: CColors.foregroundBlack,
             titleTextStyle: Styles.title,
           ),
         ),

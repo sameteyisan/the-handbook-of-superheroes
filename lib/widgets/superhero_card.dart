@@ -35,7 +35,7 @@ class SuperheroCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 height: 56.h,
                 decoration: BoxDecoration(
-                  color: CColors.textColor.withOpacity(0.6),
+                  color: CColors.backgroundcolor.withOpacity(0.6),
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(24),
                     bottomRight: Radius.circular(24),

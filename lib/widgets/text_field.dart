@@ -71,7 +71,7 @@ class CustomTextField extends StatelessWidget {
     this.hintStyle,
     this.expand = false,
     this.textCapitalization,
-    this.backgroundColor = CColors.backgroundcolor,
+    this.backgroundColor = CColors.foregroundBlack,
   }) : super(key: key);
 
   @override
@@ -82,7 +82,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
-            color: CColors.dialogColor,
+            color: CColors.sideColor,
             offset: Offset(0, 0),
             blurRadius: 1,
             spreadRadius: 1,
@@ -107,7 +107,7 @@ class CustomTextField extends StatelessWidget {
         autofocus: autoFocus,
         textAlign: textAlign,
         onTap: onTap,
-        style: style ?? Theme.of(context).textTheme.titleSmall!,
+        style: style ?? TextStyle(color: CColors.textColor, fontSize: 15.sp),
         onFieldSubmitted: onFieldSubmitted,
         keyboardType: keyboardType,
         readOnly: readOnly,
@@ -120,8 +120,7 @@ class CustomTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           hintText: hintText,
           suffixText: suffixText,
-          hintStyle: hintStyle ?? TextStyle(fontSize: 15.sp),
-          // labelStyle: TextStyle(color: CColors.subtitleColor, fontSize: 14.sp),
+          hintStyle: hintStyle ?? TextStyle(fontSize: 15.sp, color: CColors.subtitleColor),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(color: borderColor, width: 0.5.w),

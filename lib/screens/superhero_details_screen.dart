@@ -25,7 +25,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
         children: [
           Center(child: Hero(tag: "hero-${hero.id}", child: CustomNetworkImage(url: hero.url))),
           Obx(() => controller.isLoading.value
-              ? const CircularProgressIndicator()
+              ? const Center(child: CircularProgressIndicator())
               : controller.superhero.value == null
                   ? const Text("Something went wrong")
                   : Column(

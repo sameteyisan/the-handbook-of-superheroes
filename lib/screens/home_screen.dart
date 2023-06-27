@@ -11,6 +11,7 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/empty_last_heroes.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_tile.dart';
@@ -37,14 +38,20 @@ class HomeScreen extends StatelessWidget {
               CustomTextField(
                 controller: controller.searchController,
                 hintText: "Search Superhero",
-                prefixIcon: const Icon(Ionicons.search),
+                prefixIcon: const Icon(
+                  Ionicons.search,
+                  color: CColors.textColor,
+                ),
                 suffixIcon: Obx(
                   () => AnimatedOpacity(
                     opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
                     duration: 300.milliseconds,
                     child: IconButton(
                       onPressed: controller.searchController.clear,
-                      icon: const Icon(Ionicons.close),
+                      icon: const Icon(
+                        Ionicons.close,
+                        color: CColors.subtitleColor,
+                      ),
                       splashRadius: 20.sp,
                     ),
                   ),
@@ -127,19 +134,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     ValueListenableBuilder(
                                       valueListenable: Hive.box("last-heroes").listenable(),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const SizedBox(height: 32),
-                                          const Icon(Ionicons.eye_outline),
-                                          const SizedBox(height: 16),
-                                          Text(
-                                            "The superheroes you last visited are displayed here.",
-                                            style: Styles.title.copyWith(fontSize: 17.sp),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
+                                      child: const EmptyLastHeroes(),
                                       builder: (context, box, child) {
                                         if (box.isEmpty) {
                                           return child!;
