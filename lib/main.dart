@@ -10,6 +10,8 @@ import 'package:the_handbook_of_superheroes/screens/home_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 
 void main() async {
+  Paint.enableDithering = true;
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
