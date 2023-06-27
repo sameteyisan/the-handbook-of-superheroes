@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
@@ -8,6 +11,7 @@ class HomeController extends GetxController {
   final superheroes = <BasicHeroModel>[].obs;
   final featuredHeroes = <BasicHeroModel>[].obs;
 
+  final isAdmin = false.obs;
   final isLoading = false.obs;
   final isSearching = false.obs;
 
@@ -21,6 +25,12 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
+    final deviceID = await getDeviceID();
+
+    if (deviceID.isNotEmpty) {
+      isAdmin.value = await Api.getAdminData(deviceID);
+    }
+
     featuredHeroes.value = await Api.getFeaturedHeroes();
 
     searchController.addListener(listener);
@@ -82,5 +92,17 @@ class HomeController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  Future<String> getDeviceID() async {
+    final deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      final iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor ?? "";
+    } else if (Platform.isAndroid) {
+      final androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.id;
+    }
+    return "";
   }
 }

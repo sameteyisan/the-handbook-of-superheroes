@@ -23,6 +23,16 @@ class HomeScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: const Text("The Handbook of Superheroes"),
+            actions: [
+              Obx(
+                () => controller.isAdmin.value
+                    ? IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Ionicons.shield_half_outline),
+                      )
+                    : const SizedBox(),
+              ),
+            ],
           ),
           body: Column(
             children: [
