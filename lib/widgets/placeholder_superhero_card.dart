@@ -16,7 +16,7 @@ class PlaceholderSuperheroCard extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              height: Get.width * 0.62.w,
+              height: Get.width * 0.7.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 color: CColors.foregroundBlack,

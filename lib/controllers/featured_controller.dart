@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
 import 'package:the_handbook_of_superheroes/widgets/modals/yes_no_modal.dart';
@@ -75,6 +76,8 @@ class FeaturedController extends GetxController {
     for (final hero in featured) {
       await Api.setFeaturedHeroes(hero);
     }
+
+    HomeController.to.featuredHeroes.value = featured;
 
     EasyLoading.dismiss();
     Get.back();

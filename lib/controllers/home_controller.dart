@@ -7,6 +7,8 @@ import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
 
 class HomeController extends GetxController {
+  static HomeController get to => Get.find();
+
   // final superhero = Rxn<SuperheroModel>();
   final superheroes = <BasicHeroModel>[].obs;
   final featuredHeroes = <BasicHeroModel>[].obs;
@@ -26,6 +28,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     final deviceID = await getDeviceID();
+    print(deviceID);
 
     if (deviceID.isNotEmpty) {
       isAdmin.value = await Api.getAdminData(deviceID);

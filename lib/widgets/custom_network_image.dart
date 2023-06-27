@@ -15,7 +15,7 @@ class CustomNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExtendedImage.network(
       url,
-      height: (size ?? Get.width * 0.62).w,
+      height: (size ?? Get.width * 0.7).w,
       fit: BoxFit.cover,
       filterQuality: FilterQuality.high,
       cache: true,
