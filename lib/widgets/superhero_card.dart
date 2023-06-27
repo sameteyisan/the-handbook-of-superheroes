@@ -27,7 +27,7 @@ class SuperheroCard extends StatelessWidget {
       },
       child: Stack(
         children: [
-          Hero(tag: "hero-${superhero.id}", child: CustomNetworkImage(url: superhero.url)),
+          Hero(tag: "herocard-${superhero.id}", child: CustomNetworkImage(url: superhero.url)),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,

@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
-import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
 
 class SuperheroTile extends StatelessWidget {
-  const SuperheroTile({super.key, required this.superhero});
+  const SuperheroTile({super.key, required this.superhero, this.onDeleted});
   final BasicHeroModel superhero;
+
+  final Function()? onDeleted;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: () => Get.to(SuperheroesDetailsScreen(hero: superhero)),
-      child: Ink(
+    return GestureDetector(
+      onTap: () => Get.to(SuperheroesDetailsScreen(
+        hero: superhero,
+        isCard: false,
+      )),
+      child: Container(
         height: 100,
         decoration: BoxDecoration(
           color: CColors.foregroundBlack,
@@ -26,11 +28,14 @@ class SuperheroTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            CustomNetworkImage(
-              url: superhero.url,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(24),
-                bottomLeft: Radius.circular(24),
+            Hero(
+              tag: "herotile-${superhero.id}",
+              child: CustomNetworkImage(
+                url: superhero.url,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  bottomLeft: Radius.circular(24),
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -46,13 +51,7 @@ class SuperheroTile extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () async {
-                final res = await DeleteModal.open();
-                if (res != null) {
-                  final box = Hive.box("last-heroes");
-                  box.delete(superhero.id);
-                }
-              },
+              onPressed: onDeleted,
               icon: const Icon(
                 Ionicons.close,
                 color: CColors.subtitleColor,

@@ -5,9 +5,10 @@ import 'package:lottie/lottie.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({super.key, this.url, this.text});
+  const EmptyWidget({super.key, this.url, this.text, this.size});
   final String? url;
   final String? text;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class EmptyWidget extends StatelessWidget {
       children: [
         Lottie.asset(
           "assets/lotties/${url ?? "batman"}.json",
-          width: Get.width * 0.4,
+          width: size ?? Get.width * 0.4,
           repeat: false,
         ),
         const SizedBox(height: 16),

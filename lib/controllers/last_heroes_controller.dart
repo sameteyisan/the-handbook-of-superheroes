@@ -25,4 +25,13 @@ class LastHeroesController extends GetxController {
       heroes.clear();
     }
   }
+
+  void deleteHero(String id) async {
+    final res = await DeleteModal.open();
+    if (res != null) {
+      final box = Hive.box("last-heroes");
+      box.delete(id);
+      heroes.removeWhere((e) => e.id == id);
+    }
+  }
 }

@@ -40,13 +40,14 @@ class LastHeroesScreen extends StatelessWidget {
               : ListView(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  reverse: true,
                   children: controller.heroes.map(
                     (hero) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 16),
-                        child: SuperheroTile(superhero: hero),
+                        child: SuperheroTile(
+                          superhero: hero,
+                          onDeleted: () => controller.deleteHero(hero.id),
+                        ),
                       );
                     },
                   ).toList(),

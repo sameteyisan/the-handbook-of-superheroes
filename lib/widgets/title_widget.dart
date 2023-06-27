@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget(this.title, {Key? key, this.more, this.onTap}) : super(key: key);
+  const TitleWidget(this.title, {Key? key, this.more, this.onTap, this.tPadding}) : super(key: key);
 
   final String title;
   final String? more;
+
+  final double? tPadding;
 
   final Function()? onTap;
 
@@ -14,13 +16,17 @@ class TitleWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: Styles.title,
-          textAlign: TextAlign.left,
+        Padding(
+          padding: EdgeInsets.only(left: tPadding ?? 0),
+          child: Text(
+            title,
+            style: Styles.title,
+            textAlign: TextAlign.left,
+          ),
         ),
         if (more != null)
           TextButton(
+            style: TextButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: tPadding ?? 0)),
             onPressed: onTap,
             child: Text(
               more!,

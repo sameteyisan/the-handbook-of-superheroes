@@ -12,8 +12,9 @@ import 'package:the_handbook_of_superheroes/widgets/powerstats.dart';
 import 'package:the_handbook_of_superheroes/widgets/title_widget.dart';
 
 class SuperheroesDetailsScreen extends StatelessWidget {
-  const SuperheroesDetailsScreen({super.key, required this.hero});
+  const SuperheroesDetailsScreen({super.key, required this.hero, this.isCard = true});
   final BasicHeroModel hero;
+  final bool isCard;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,10 @@ class SuperheroesDetailsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Center(child: Hero(tag: "hero-${hero.id}", child: CustomNetworkImage(url: hero.url))),
+          Center(
+              child: Hero(
+                  tag: "hero${isCard ? "card" : "tile"}-${hero.id}",
+                  child: CustomNetworkImage(url: hero.url))),
           Obx(() => controller.isLoading.value
               ? const Padding(
                   padding: EdgeInsets.only(top: 32),

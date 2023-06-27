@@ -72,4 +72,15 @@ class HomeController extends GetxController {
     superheroes.value = await Api.getSuperheros(searchText.value);
     isLoading.value = false;
   }
+
+  Future<bool> onWillPop() async {
+    if (superheroes.isNotEmpty) {
+      searchController.clear();
+      superheroes.clear();
+      isLoading.value = false;
+      isSearching.value = false;
+      return false;
+    }
+    return true;
+  }
 }
