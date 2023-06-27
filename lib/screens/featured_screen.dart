@@ -7,6 +7,7 @@ import 'package:the_handbook_of_superheroes/controllers/featured_controller.dart
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
+import 'package:the_handbook_of_superheroes/widgets/placeholder_superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_tile.dart';
 import 'package:the_handbook_of_superheroes/widgets/text_field.dart';
@@ -40,28 +41,45 @@ class FeaturedScreenn extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
             Obx(
-              () => controller.featured.isEmpty
+              () => !controller.isLoading.value && controller.featured.isEmpty
                   ? const EmptyWidget(text: "There is no superhero that featured.")
-                  : CarouselSlider(
-                      key: const PageStorageKey("featured"),
-                      options: CarouselOptions(
-                        viewportFraction: 0.52,
-                        enableInfiniteScroll: false,
-                        height: 260.h,
-                        scrollPhysics: const BouncingScrollPhysics(),
-                        autoPlay: true,
-                        autoPlayInterval: 5.seconds,
-                        autoPlayAnimationDuration: 1500.milliseconds,
+                  : Obx(
+                      () => AnimatedCrossFade(
+                        firstChild: CarouselSlider(
+                          key: const PageStorageKey("featured-carousel"),
+                          items: List.generate(5, (index) => const PlaceholderSuperheroCard()),
+                          options: CarouselOptions(
+                            viewportFraction: 0.52,
+                            height: 260.h,
+                            scrollPhysics: const BouncingScrollPhysics(),
+                          ),
+                        ),
+                        secondChild: CarouselSlider(
+                          key: const PageStorageKey("featured"),
+                          options: CarouselOptions(
+                            viewportFraction: 0.52,
+                            enableInfiniteScroll: false,
+                            height: 260.h,
+                            scrollPhysics: const BouncingScrollPhysics(),
+                            autoPlay: true,
+                            autoPlayInterval: 5.seconds,
+                            autoPlayAnimationDuration: 1500.milliseconds,
+                          ),
+                          items: controller.featured
+                              .map((hero) => SuperheroCard(
+                                    superhero: hero,
+                                    isDeleted: true,
+                                    onDeleted: () {
+                                      controller.featured.removeWhere((e) => e.id == hero.id);
+                                    },
+                                  ))
+                              .toList(),
+                        ),
+                        crossFadeState: controller.featured.isEmpty
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
+                        duration: 1.seconds,
                       ),
-                      items: controller.featured
-                          .map((hero) => SuperheroCard(
-                                superhero: hero,
-                                isDeleted: true,
-                                onDeleted: () {
-                                  controller.featured.removeWhere((e) => e.id == hero.id);
-                                },
-                              ))
-                          .toList(),
                     ),
             ),
             const SizedBox(height: 32),

@@ -10,6 +10,8 @@ class FeaturedController extends GetxController {
   final tempFeatured = <BasicHeroModel>[].obs;
   final superheroes = <BasicHeroModel>[].obs;
 
+  final isLoading = true.obs;
+
   final searchController = TextEditingController();
 
   final searchText = "".obs;
@@ -27,6 +29,8 @@ class FeaturedController extends GetxController {
     featured.value = await Api.getFeaturedHeroes();
 
     tempFeatured.addAll(featured);
+
+    isLoading.value = false;
     super.onInit();
   }
 

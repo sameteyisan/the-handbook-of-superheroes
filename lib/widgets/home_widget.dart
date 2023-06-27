@@ -12,6 +12,7 @@ import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
+import 'package:the_handbook_of_superheroes/widgets/placeholder_superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_tile.dart';
 import 'package:the_handbook_of_superheroes/widgets/title_widget.dart';
@@ -26,18 +27,33 @@ class HomeWidget extends GetView<HomeController> {
         const TitleWidget("Featured Superheroes", tPadding: 16),
         const SizedBox(height: 16),
         Obx(
-          () => CarouselSlider(
-            key: const PageStorageKey("featured-carousel"),
-            options: CarouselOptions(
-              viewportFraction: 0.52,
-              height: 260.h,
-              scrollPhysics: const BouncingScrollPhysics(),
-              autoPlay: true,
-              autoPlayInterval: 5.seconds,
-              autoPlayAnimationDuration: 1500.milliseconds,
-              onPageChanged: (index, reason) => controller.currentCenter.value = index,
+          () => AnimatedCrossFade(
+            firstChild: CarouselSlider(
+              key: const PageStorageKey("featured-carousel"),
+              items: List.generate(5, (index) => const PlaceholderSuperheroCard()),
+              options: CarouselOptions(
+                viewportFraction: 0.52,
+                height: 260.h,
+                scrollPhysics: const BouncingScrollPhysics(),
+              ),
             ),
-            items: controller.featuredHeroes.map((e) => SuperheroCard(superhero: e)).toList(),
+            secondChild: CarouselSlider(
+              key: const PageStorageKey("featured-carousel"),
+              items: controller.featuredHeroes.map((e) => SuperheroCard(superhero: e)).toList(),
+              options: CarouselOptions(
+                viewportFraction: 0.52,
+                height: 260.h,
+                scrollPhysics: const BouncingScrollPhysics(),
+                autoPlay: true,
+                autoPlayInterval: 5.seconds,
+                autoPlayAnimationDuration: 1500.milliseconds,
+                onPageChanged: (index, reason) => controller.currentCenter.value = index,
+              ),
+            ),
+            crossFadeState: controller.featuredHeroes.isEmpty
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            duration: 1.seconds,
           ),
         ),
         const SizedBox(height: 16),
