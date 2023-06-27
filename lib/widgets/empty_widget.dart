@@ -15,7 +15,7 @@ class EmptyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Lottie.asset(
-          url ?? "assets/lotties/$url.json",
+          "assets/lotties/${url ?? "batman"}.json",
           width: Get.width * 0.4,
           repeat: false,
         ),
