@@ -2,21 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
-import 'package:the_handbook_of_superheroes/widgets/custom_ink_well.dart';
+import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 
 class SuperheroCard extends StatelessWidget {
-  const SuperheroCard({super.key, required this.superhero, this.extraOnTap});
+  const SuperheroCard({
+    super.key,
+    required this.superhero,
+    this.extraOnTap,
+    this.isDeleted = false,
+    this.onDeleted,
+  });
 
   final BasicHeroModel superhero;
   final Function()? extraOnTap;
+  final bool isDeleted;
+  final Function()? onDeleted;
 
   @override
   Widget build(BuildContext context) {
-    return CustomInkWell(
+    return GestureDetector(
       onTap: () async {
         extraOnTap?.call();
         Get.to(SuperheroesDetailsScreen(hero: superhero));
@@ -51,6 +60,23 @@ class SuperheroCard extends StatelessWidget {
               ),
             ),
           ),
+          if (isDeleted)
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8, right: 8),
+                  child: CustomIconButton(
+                    onTap: onDeleted,
+                    backgroundColor: CColors.foregroundBlack.withOpacity(0.7),
+                    icon: const Icon(
+                      Ionicons.trash,
+                      color: CColors.textColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

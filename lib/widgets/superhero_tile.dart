@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 
 class SuperheroTile extends StatelessWidget {
-  const SuperheroTile({super.key, required this.superhero, this.onDeleted});
+  const SuperheroTile({
+    super.key,
+    required this.superhero,
+    this.onDeleted,
+    required this.icon,
+    this.iconColor,
+  });
   final BasicHeroModel superhero;
 
   final Function()? onDeleted;
+  final IconData icon;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +59,9 @@ class SuperheroTile extends StatelessWidget {
             ),
             IconButton(
               onPressed: onDeleted,
-              icon: const Icon(
-                Ionicons.close,
-                color: CColors.subtitleColor,
+              icon: Icon(
+                icon,
+                color: iconColor ?? CColors.subtitleColor,
               ),
             )
           ],

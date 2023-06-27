@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
@@ -86,6 +87,7 @@ class HomeWidget extends GetView<HomeController> {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: SuperheroTile(
                         superhero: superhero,
+                        icon: Ionicons.close,
                         onDeleted: () async {
                           final res = await DeleteModal.open();
                           if (res != null) {

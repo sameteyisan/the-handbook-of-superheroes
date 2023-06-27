@@ -50,6 +50,17 @@ class Api {
     }
   }
 
+  static Future<List<BasicHeroModel>> getallSuperheros() async {
+    try {
+      final superheroes = await firestore.collection("heroes").get();
+
+      return superheroes.docs.map((e) => BasicHeroModel.fromMap(e.data())).toList();
+    } catch (e) {
+      debugPrint('Get Superheros Error : $e');
+      return [];
+    }
+  }
+
   static Future<List<BasicHeroModel>> getFeaturedHeroes() async {
     try {
       final res = await firestore.collection("featured").get();
@@ -57,6 +68,22 @@ class Api {
     } catch (e) {
       debugPrint('Get Featured Heroes Error : $e');
       return [];
+    }
+  }
+
+  static Future<void> deleteFeaturedHeroes(BasicHeroModel hero) async {
+    try {
+      await firestore.collection("featured").doc(hero.id).delete();
+    } catch (e) {
+      debugPrint('Delete Featured Heroes Error : $e');
+    }
+  }
+
+  static Future<void> setFeaturedHeroes(BasicHeroModel hero) async {
+    try {
+      await firestore.collection("featured").doc(hero.id).set(hero.toMap());
+    } catch (e) {
+      debugPrint('Set Featured Heroes Error : $e');
     }
   }
 

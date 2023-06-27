@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
+import 'package:the_handbook_of_superheroes/screens/admin_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/home_widget.dart';
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               Obx(
                 () => controller.isAdmin.value
                     ? IconButton(
-                        onPressed: () {},
+                        onPressed: () => Get.to(const AdminScreen()),
                         icon: const Icon(Ionicons.shield_half_outline),
                       )
                     : const SizedBox(),

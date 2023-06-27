@@ -47,6 +47,7 @@ class LastHeroesScreen extends StatelessWidget {
                         child: SuperheroTile(
                           superhero: hero,
                           onDeleted: () => controller.deleteHero(hero.id),
+                          icon: Ionicons.close,
                         ),
                       );
                     },
