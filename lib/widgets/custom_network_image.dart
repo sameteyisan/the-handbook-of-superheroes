@@ -16,13 +16,11 @@ class CustomNetworkImage extends StatelessWidget {
       url,
       height: (size ?? Get.width * 0.62).w,
       fit: BoxFit.cover,
+      filterQuality: FilterQuality.high,
       cache: true,
-      border: Border.all(color: CColors.iconColor, width: 0.1),
+      border: Border.all(color: CColors.foregroundBlack, width: 1),
       shape: BoxShape.rectangle,
-      borderRadius: borderRadius ??
-          const BorderRadius.all(
-            Radius.circular(24),
-          ),
+      borderRadius: borderRadius ?? BorderRadius.circular(24),
     );
   }
 }

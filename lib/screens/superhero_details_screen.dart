@@ -8,6 +8,7 @@ import 'package:the_handbook_of_superheroes/widgets/center_loading.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 import 'package:the_handbook_of_superheroes/widgets/detail_panel.dart';
+import 'package:the_handbook_of_superheroes/widgets/powerstats.dart';
 import 'package:the_handbook_of_superheroes/widgets/title_widget.dart';
 
 class SuperheroesDetailsScreen extends StatelessWidget {
@@ -69,7 +70,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                         ...controller.superhero.value!.powerstats
                             .toMap()
                             .entries
-                            .map((kv) => DetailPanel(kv: kv)),
+                            .map((kv) => PowerStats(kv: kv)),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 16),
                           child: TitleWidget("Appearance"),
