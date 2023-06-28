@@ -40,7 +40,6 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_screenutil: ^5.8.4
   ionicons: ^0.2.2
-  dio: ^5.2.1+1
   lottie: ^2.4.0
   firebase_core: ^2.14.0
   cloud_firestore: ^4.8.2

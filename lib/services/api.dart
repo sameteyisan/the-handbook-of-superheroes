@@ -1,28 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
-import 'package:the_handbook_of_superheroes/const.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/models/superhero.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
 
 class Api {
   static final firestore = FirebaseFirestore.instance;
-
-  static Future<Dio> dioAuth() async {
-    return Dio(
-      BaseOptions(
-        baseUrl: Const.apiUrl,
-        connectTimeout: 20.seconds,
-        receiveTimeout: 20.seconds,
-        headers: {
-          "Accept": "application/json",
-        },
-        responseType: ResponseType.json,
-      ),
-    );
-  }
 
   static Future<SuperheroModel?> getSuperheroDetails(String id) async {
     try {
