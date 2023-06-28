@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
               inactiveTrackColor: CColors.sideColor,
               thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
               thumbColor: Colors.transparent,
-              rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 4, elevation: 0),
+              rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 0.1, elevation: 0),
             )),
         // initialBinding: GlobalBindings(),
         home: child,
