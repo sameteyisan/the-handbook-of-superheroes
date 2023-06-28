@@ -5,11 +5,13 @@ class BasicHeroModel {
   final String name;
   final String url;
   final DateTime? date;
+  final bool? isFavorite;
   BasicHeroModel({
     required this.id,
     required this.name,
     required this.url,
     this.date,
+    this.isFavorite,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,6 +23,9 @@ class BasicHeroModel {
     if (date != null) {
       result.addAll({'date': date!.millisecondsSinceEpoch});
     }
+    if (isFavorite != null) {
+      result.addAll({'isFavorite': isFavorite});
+    }
 
     return result;
   }
@@ -31,6 +36,7 @@ class BasicHeroModel {
       name: map['name'] ?? '',
       url: map['url'] ?? '',
       date: map['date'] != null ? DateTime.fromMillisecondsSinceEpoch(map['date']) : null,
+      isFavorite: map['isFavorite'],
     );
   }
 
@@ -43,12 +49,19 @@ class BasicHeroModel {
     String? name,
     String? url,
     DateTime? date,
+    bool? isFavorite,
   }) {
     return BasicHeroModel(
       id: id ?? this.id,
       name: name ?? this.name,
       url: url ?? this.url,
       date: date ?? this.date,
+      isFavorite: isFavorite,
     );
+  }
+
+  @override
+  String toString() {
+    return 'BasicHeroModel(id: $id, name: $name, url: $url, date: $date, isFavorite: $isFavorite)';
   }
 }

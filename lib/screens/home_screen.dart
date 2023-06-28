@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/screens/admin_screen.dart';
+import 'package:the_handbook_of_superheroes/screens/favorites_page.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
@@ -27,18 +28,27 @@ class HomeScreen extends StatelessWidget {
         onTap: FocusScope.of(context).unfocus,
         child: Scaffold(
           appBar: AppBar(
+            leading: Obx(
+              () => controller.isAdmin.value
+                  ? IconButton(
+                      onPressed: () => Get.to(const AdminScreen()),
+                      icon: Icon(
+                        Ionicons.shield_half_outline,
+                        shadows: Const.shadows,
+                        color: CColors.subtitleColor,
+                      ),
+                    )
+                  : const SizedBox(),
+            ),
             title: const Text("The Handbook of Superheroes"),
             actions: [
-              Obx(
-                () => controller.isAdmin.value
-                    ? IconButton(
-                        onPressed: () => Get.to(const AdminScreen()),
-                        icon: Icon(
-                          Ionicons.shield_half_outline,
-                          shadows: Const.shadows,
-                        ),
-                      )
-                    : const SizedBox(),
+              IconButton(
+                onPressed: () => Get.to(const FavoritesPage()),
+                icon: Icon(
+                  Ionicons.heart,
+                  shadows: Const.shadows,
+                  color: CColors.textColor,
+                ),
               ),
             ],
           ),

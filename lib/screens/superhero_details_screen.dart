@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/controllers/superhero_details_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
@@ -9,6 +10,7 @@ import 'package:the_handbook_of_superheroes/widgets/center_loading.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
+import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_ink_well.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 import 'package:the_handbook_of_superheroes/widgets/detail_panel.dart';
@@ -44,45 +46,76 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              if (showCompare)
-                Obx(() {
-                  final isHave =
-                      homeController.versusHeroes.firstWhereOrNull((e) => e.id == hero.id) != null;
-                  return AnimatedOpacity(
-                    opacity: isHave ? 0.2 : 1,
-                    duration: 300.milliseconds,
-                    child: Center(
-                      child: CustomInkWell(
-                        radius: 24,
-                        onTap: isHave ? null : () => controller.compare(hero),
-                        child: AnimatedContainer(
-                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (showCompare)
+                    Obx(
+                      () {
+                        final isHave =
+                            homeController.versusHeroes.firstWhereOrNull((e) => e.id == hero.id) !=
+                                null;
+                        return AnimatedOpacity(
+                          opacity: isHave ? 0.2 : 1,
                           duration: 300.milliseconds,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(2, 2),
+                          child: Center(
+                            child: CustomInkWell(
+                              radius: 24,
+                              onTap: isHave ? null : () => controller.compare(hero),
+                              child: AnimatedContainer(
+                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                                duration: 300.milliseconds,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.6),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: const Offset(2, 2),
+                                    ),
+                                  ],
+                                  color: CColors.foregroundBlack,
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Text(
+                                  "Add to Compare",
+                                  style: TextStyle(
+                                    color: CColors.textColor,
+                                    fontSize: 17.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
-                            ],
-                            color: CColors.foregroundBlack,
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Text(
-                            "Add to Compare",
-                            style: TextStyle(
-                              color: CColors.textColor,
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
+                        );
+                      },
+                    ),
+                  const SizedBox(width: 16),
+                  CustomIconButton(
+                    backgroundColor: CColors.subtitleColor,
+                    size: 36,
+                    radius: 12,
+                    icon: Obx(
+                      () => AnimatedCrossFade(
+                        firstChild: Icon(
+                          Ionicons.heart,
+                          color: CColors.red,
                         ),
+                        secondChild: const Icon(
+                          Ionicons.heart_outline,
+                          color: CColors.backgroundcolor,
+                        ),
+                        crossFadeState: controller.isFavorite.value
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
+                        duration: 300.milliseconds,
                       ),
                     ),
-                  );
-                }),
+                    onTap: () => controller.favoriteToggle(hero),
+                  )
+                ],
+              ),
               Obx(() => controller.isLoading.value
                   ? const Padding(
                       padding: EdgeInsets.only(top: 32),

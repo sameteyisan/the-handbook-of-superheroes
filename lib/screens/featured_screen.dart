@@ -136,8 +136,11 @@ class FeaturedScreenn extends StatelessWidget {
                                 padding: const EdgeInsets.only(bottom: 16),
                                 child: SuperheroTile(
                                   superhero: e,
-                                  icon: Ionicons.checkmark,
-                                  iconColor: isHave ? CColors.mainColor : null,
+                                  icon: Icon(
+                                    Ionicons.checkmark,
+                                    color: isHave ? CColors.mainColor : CColors.subtitleColor,
+                                    shadows: Const.shadows,
+                                  ),
                                   onDeleted: () => controller.addOrRemove(e, isHave),
                                 ),
                               );

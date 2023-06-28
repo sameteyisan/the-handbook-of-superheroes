@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
@@ -18,7 +17,7 @@ class SuperheroTile extends StatelessWidget {
   final BasicHeroModel superhero;
 
   final Function()? onDeleted;
-  final IconData icon;
+  final Widget icon;
   final Color? iconColor;
 
   @override
@@ -58,12 +57,11 @@ class SuperheroTile extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-            IconButton(
-              onPressed: onDeleted,
-              icon: Icon(
-                icon,
-                color: iconColor ?? CColors.subtitleColor,
-                shadows: Const.shadows,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: IconButton(
+                onPressed: onDeleted,
+                icon: icon,
               ),
             )
           ],

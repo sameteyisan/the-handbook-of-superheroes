@@ -12,6 +12,7 @@ class CColors {
   static const sideColor = Color(0x4cb7b7b3);
   static const indicatorColor = Color(0xff6a6a6a);
   static const disabledColor = Color(0xff393939);
+  static final red = Colors.red[700];
 
   static const Map<int, Color> primarySwatchColors = {
     50: Color.fromRGBO(0, 120, 212, .1),

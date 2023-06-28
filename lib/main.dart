@@ -28,6 +28,7 @@ void main() async {
     ..indicatorType = EasyLoadingIndicatorType.chasingDots;
 
   await Hive.initFlutter();
+  await Hive.openBox("favorites");
   await Hive.openBox("last-heroes");
 
   runApp(const MyApp());

@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
@@ -100,7 +102,11 @@ class HomeWidget extends GetView<HomeController> {
                           padding: const EdgeInsets.only(bottom: 8),
                           child: SuperheroTile(
                             superhero: superhero,
-                            icon: Ionicons.close,
+                            icon: Icon(
+                              Ionicons.close,
+                              color: CColors.subtitleColor,
+                              shadows: Const.shadows,
+                            ),
                             onDeleted: () => controller.deleteHero(superhero.id),
                           ),
                         );
