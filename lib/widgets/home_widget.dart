@@ -30,7 +30,12 @@ class HomeWidget extends GetView<HomeController> {
           () => AnimatedCrossFade(
             firstChild: CarouselSlider(
               key: const PageStorageKey("featured-carousel"),
-              items: List.generate(5, (index) => const PlaceholderSuperheroCard()),
+              items: List.generate(
+                  5,
+                  (index) => const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: PlaceholderSuperheroCard(),
+                      )),
               options: CarouselOptions(
                 viewportFraction: 0.52,
                 height: 260.h,
@@ -117,6 +122,12 @@ class HomeWidget extends GetView<HomeController> {
                 ).toList(),
               );
             },
+          ),
+        ),
+        Obx(
+          () => AnimatedContainer(
+            duration: 300.milliseconds,
+            height: controller.versusHeroes.isNotEmpty ? 250.h : 32,
           ),
         ),
       ],

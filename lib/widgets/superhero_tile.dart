@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 
 class SuperheroTile extends StatelessWidget {
@@ -62,6 +63,7 @@ class SuperheroTile extends StatelessWidget {
               icon: Icon(
                 icon,
                 color: iconColor ?? CColors.subtitleColor,
+                shadows: Const.shadows,
               ),
             )
           ],

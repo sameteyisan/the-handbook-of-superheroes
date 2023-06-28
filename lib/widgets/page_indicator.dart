@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class PageIndicator extends StatelessWidget {
   const PageIndicator({Key? key, required this.isActive}) : super(key: key);

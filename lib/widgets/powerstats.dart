@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_handbook_of_superheroes/const.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
 
 class PowerStats extends StatelessWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_ink_well.dart';
 
 class AdminCard extends StatelessWidget {
@@ -55,6 +56,7 @@ class AdminCard extends StatelessWidget {
               Icon(
                 icon,
                 color: CColors.subtitleColor,
+                shadows: Const.shadows,
                 size: 28.sp,
               ),
               const SizedBox(height: 4),

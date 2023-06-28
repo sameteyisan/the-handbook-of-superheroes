@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget(this.title, {Key? key, this.more, this.onTap, this.tPadding}) : super(key: key);

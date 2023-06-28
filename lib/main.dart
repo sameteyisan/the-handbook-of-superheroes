@@ -7,7 +7,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/firebase_options.dart';
 import 'package:the_handbook_of_superheroes/screens/home_screen.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 void main() async {
   Paint.enableDithering = true;
@@ -19,7 +20,11 @@ void main() async {
   );
 
   EasyLoading.instance
-    ..errorWidget = const Icon(Ionicons.warning)
+    ..errorWidget = Icon(
+      Ionicons.warning,
+      color: CColors.textColor,
+      shadows: Const.shadows,
+    )
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle;
 
   await Hive.initFlutter();

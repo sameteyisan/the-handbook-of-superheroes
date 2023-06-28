@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   // final superhero = Rxn<SuperheroModel>();
   final superheroes = <BasicHeroModel>[].obs;
   final featuredHeroes = <BasicHeroModel>[].obs;
+  final versusHeroes = <BasicHeroModel>[].obs;
 
   final isAdmin = false.obs;
   final isLoading = false.obs;

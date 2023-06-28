@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
 
 class DetailPanel extends StatelessWidget {

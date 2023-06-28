@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/featured_controller.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/placeholder_superhero_card.dart';
@@ -28,8 +29,9 @@ class FeaturedScreenn extends StatelessWidget {
               () => controller.featured.length > 2
                   ? IconButton(
                       onPressed: controller.save,
-                      icon: const Icon(
+                      icon: Icon(
                         Ionicons.save_outline,
+                        shadows: Const.shadows,
                         color: CColors.textColor,
                       ),
                     )
@@ -68,10 +70,8 @@ class FeaturedScreenn extends StatelessWidget {
                           items: controller.featured
                               .map((hero) => SuperheroCard(
                                     superhero: hero,
-                                    isDeleted: true,
-                                    onDeleted: () {
-                                      controller.featured.removeWhere((e) => e.id == hero.id);
-                                    },
+                                    onDeleted: () =>
+                                        controller.featured.removeWhere((e) => e.id == hero.id),
                                   ))
                               .toList(),
                         ),
@@ -88,9 +88,10 @@ class FeaturedScreenn extends StatelessWidget {
               child: CustomTextField(
                 controller: controller.searchController,
                 hintText: "Search Superhero",
-                prefixIcon: const Icon(
+                prefixIcon: Icon(
                   Ionicons.search,
                   color: CColors.textColor,
+                  shadows: Const.shadows,
                 ),
                 suffixIcon: Obx(
                   () => AnimatedOpacity(
@@ -98,9 +99,10 @@ class FeaturedScreenn extends StatelessWidget {
                     duration: 300.milliseconds,
                     child: IconButton(
                       onPressed: controller.searchController.clear,
-                      icon: const Icon(
+                      icon: Icon(
                         Ionicons.close,
                         color: CColors.subtitleColor,
+                        shadows: Const.shadows,
                       ),
                       splashRadius: 20.sp,
                     ),

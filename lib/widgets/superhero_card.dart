@@ -3,9 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
-import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
 
@@ -14,14 +15,18 @@ class SuperheroCard extends StatelessWidget {
     super.key,
     required this.superhero,
     this.extraOnTap,
-    this.isDeleted = false,
     this.onDeleted,
+    this.urlSize,
+    this.iconSize,
+    this.heroAnimation = true,
   });
 
   final BasicHeroModel superhero;
   final Function()? extraOnTap;
-  final bool isDeleted;
   final Function()? onDeleted;
+  final double? urlSize;
+  final double? iconSize;
+  final bool heroAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,13 @@ class SuperheroCard extends StatelessWidget {
       },
       child: Stack(
         children: [
-          Hero(tag: "herocard-${superhero.id}", child: CustomNetworkImage(url: superhero.url)),
+          Hero(
+            tag: heroAnimation ? "herocard-${superhero.id}" : "",
+            child: CustomNetworkImage(
+              url: superhero.url,
+              size: urlSize,
+            ),
+          ),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -60,18 +71,20 @@ class SuperheroCard extends StatelessWidget {
               ),
             ),
           ),
-          if (isDeleted)
+          if (onDeleted != null)
             Positioned.fill(
               child: Align(
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8, right: 8),
                   child: CustomIconButton(
+                    size: iconSize,
                     onTap: onDeleted,
-                    backgroundColor: CColors.foregroundBlack.withOpacity(0.7),
-                    icon: const Icon(
+                    backgroundColor: CColors.foregroundBlack.withOpacity(0.9),
+                    icon: Icon(
                       Ionicons.trash,
                       color: CColors.textColor,
+                      shadows: Const.shadows,
                     ),
                   ),
                 ),
