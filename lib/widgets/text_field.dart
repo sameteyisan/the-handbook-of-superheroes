@@ -80,14 +80,6 @@ class CustomTextField extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: CColors.sideColor,
-            offset: Offset(0, 0),
-            blurRadius: 1,
-            spreadRadius: 1,
-          )
-        ],
       ),
       child: TextFormField(
         inputFormatters: inputFormatters,

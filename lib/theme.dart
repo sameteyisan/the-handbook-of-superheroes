@@ -36,6 +36,12 @@ class Styles {
         color: CColors.textColor,
       );
 
+  static TextStyle get subtitle => TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w300,
+        color: CColors.textColor,
+      );
+
   static TextStyle get bigTitle => TextStyle(
         fontSize: 23.sp,
         fontWeight: FontWeight.bold,

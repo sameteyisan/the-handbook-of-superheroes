@@ -17,12 +17,13 @@ class Api {
     }
   }
 
-  static Future<List<BasicHeroModel>> getSuperheros(String name) async {
+  static Future<List<BasicHeroModel>> getSuperheros(String name, {bool descending = false}) async {
     try {
       final superheroes = await firestore
           .collection("heroes")
           .where('name', isGreaterThanOrEqualTo: name.titleCase)
           .where('name', isLessThanOrEqualTo: '${name.titleCase}\uf8ff')
+          .orderBy("name", descending: descending)
           .limit(20)
           .get();
 

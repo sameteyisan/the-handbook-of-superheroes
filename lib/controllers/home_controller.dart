@@ -16,6 +16,7 @@ class HomeController extends GetxController {
   final isAdmin = false.obs;
   final isLoading = false.obs;
   final isSearching = false.obs;
+  final isDescending = false.obs;
 
   final searchController = TextEditingController();
 
@@ -37,6 +38,8 @@ class HomeController extends GetxController {
     featuredHeroes.value = await Api.getFeaturedHeroes();
 
     searchController.addListener(listener);
+
+    ever(isDescending, (_) => search());
 
     ever(searchText, (name) async {
       // isLoading.value = true;
@@ -82,7 +85,7 @@ class HomeController extends GetxController {
     isSearching.value = true;
     if (searchText.value.isEmpty) return;
     isLoading.value = true;
-    superheroes.value = await Api.getSuperheros(searchText.value);
+    superheroes.value = await Api.getSuperheros(searchText.value, descending: isDescending.value);
     isLoading.value = false;
   }
 

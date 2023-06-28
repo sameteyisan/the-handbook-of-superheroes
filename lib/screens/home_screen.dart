@@ -5,6 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/screens/admin_screen.dart';
 import 'package:the_handbook_of_superheroes/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/home_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
@@ -39,28 +40,62 @@ class HomeScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: CustomTextField(
-                  controller: controller.searchController,
-                  hintText: "Search Superhero",
-                  prefixIcon: const Icon(
-                    Ionicons.search,
-                    color: CColors.textColor,
-                  ),
-                  suffixIcon: Obx(
-                    () => AnimatedOpacity(
-                      opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
-                      duration: 300.milliseconds,
-                      child: IconButton(
-                        onPressed: controller.searchController.clear,
-                        icon: const Icon(
-                          Ionicons.close,
-                          color: CColors.subtitleColor,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: CustomTextField(
+                        controller: controller.searchController,
+                        hintText: "Search Superhero",
+                        prefixIcon: const Icon(
+                          Ionicons.search,
+                          color: CColors.textColor,
                         ),
-                        splashRadius: 20.sp,
+                        suffixIcon: Obx(
+                          () => AnimatedOpacity(
+                            opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
+                            duration: 300.milliseconds,
+                            child: IconButton(
+                              onPressed: controller.searchController.clear,
+                              icon: const Icon(
+                                Ionicons.close,
+                                color: CColors.subtitleColor,
+                              ),
+                              splashRadius: 20.sp,
+                            ),
+                          ),
+                        ),
+                        onFieldSubmitted: (_) => controller.search(),
                       ),
                     ),
-                  ),
-                  onFieldSubmitted: (_) => controller.search(),
+                    Obx(
+                      () => AnimatedSize(
+                        duration: 300.milliseconds,
+                        child: controller.searchText.value.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: CustomIconButton(
+                                  backgroundColor: CColors.foregroundBlack,
+                                  icon: AnimatedCrossFade(
+                                    firstChild: Text(
+                                      "A-Z",
+                                      style: Styles.subtitle.copyWith(fontWeight: FontWeight.bold),
+                                    ),
+                                    secondChild: Text(
+                                      "Z-A",
+                                      style: Styles.subtitle.copyWith(fontWeight: FontWeight.bold),
+                                    ),
+                                    crossFadeState: controller.isDescending.value
+                                        ? CrossFadeState.showSecond
+                                        : CrossFadeState.showFirst,
+                                    duration: 500.milliseconds,
+                                  ),
+                                  onTap: controller.isDescending.toggle,
+                                ),
+                              )
+                            : const SizedBox(height: 46),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 16),
