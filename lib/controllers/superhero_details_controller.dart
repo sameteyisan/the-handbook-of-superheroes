@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:the_handbook_of_superheroes/controllers/favorites_controller.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/models/superhero.dart';
@@ -49,12 +50,20 @@ class SuperheroDetailsController extends GetxController {
     if (isFavorite.value) {
       await box.delete(hero.id);
       isFavorite.value = false;
+      try {
+        FavoritesController.to.heroes.removeWhere((e) => e.id == hero.id);
+      } catch (_) {}
     } else {
       box.put(
         hero.id,
         hero.copyWith(date: DateTime.now(), isFavorite: true).toJson(),
       );
       isFavorite.value = true;
+      try {
+        FavoritesController.to.heroes.removeWhere((e) => e.id == hero.id);
+        FavoritesController.to.heroes
+            .insert(0, hero.copyWith(date: DateTime.now(), isFavorite: true));
+      } catch (_) {}
     }
   }
 }

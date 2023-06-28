@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 
 class FavoritesController extends GetxController {
+  static FavoritesController get to => Get.find();
+
   final heroes = <BasicHeroModel>[].obs;
 
   @override
