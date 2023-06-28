@@ -51,7 +51,7 @@ class CompareWidget extends GetView<HomeController> {
                         ),
                         const SizedBox(height: 16),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SuperheroCard(
                               superhero: controller.versusHeroes[0],
@@ -60,9 +60,24 @@ class CompareWidget extends GetView<HomeController> {
                               onDeleted: () => controller.versusHeroes.removeAt(0),
                               heroAnimation: false,
                             ),
-                            Lottie.asset(
-                              "assets/lotties/batman.json",
-                              width: 100.w,
+                            Stack(
+                              children: [
+                                Lottie.asset(
+                                  "assets/lotties/batman.json",
+                                  width: 100.w,
+                                ),
+                                Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      "VS",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10.sp,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                             if (controller.versusHeroes.length > 1)
                               SuperheroCard(
@@ -84,9 +99,7 @@ class CompareWidget extends GetView<HomeController> {
                   ),
                 ),
               )
-            : const SizedBox(
-                width: double.infinity,
-              ),
+            : const SizedBox(width: double.infinity),
       ),
     );
   }

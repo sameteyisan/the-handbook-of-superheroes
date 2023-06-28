@@ -49,7 +49,12 @@ class FeaturedScreenn extends StatelessWidget {
                       () => AnimatedCrossFade(
                         firstChild: CarouselSlider(
                           key: const PageStorageKey("featured-carousel"),
-                          items: List.generate(5, (index) => const PlaceholderSuperheroCard()),
+                          items: List.generate(
+                              3,
+                              (index) => const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 12),
+                                    child: PlaceholderSuperheroCard(),
+                                  )),
                           options: CarouselOptions(
                             viewportFraction: 0.52,
                             height: 260.h,

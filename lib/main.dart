@@ -25,7 +25,7 @@ void main() async {
       color: CColors.textColor,
       shadows: Const.shadows,
     )
-    ..indicatorType = EasyLoadingIndicatorType.fadingCircle;
+    ..indicatorType = EasyLoadingIndicatorType.chasingDots;
 
   await Hive.initFlutter();
   await Hive.openBox("last-heroes");

@@ -3,9 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
+import 'package:the_handbook_of_superheroes/utils/const.dart';
+import 'package:the_handbook_of_superheroes/utils/helper.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
@@ -42,7 +43,7 @@ class SuperheroCard extends StatelessWidget {
       child: Stack(
         children: [
           Hero(
-            tag: heroAnimation ? "herocard-${superhero.id}" : "",
+            tag: heroAnimation ? "herocard-${superhero.id}" : Helper.generateNonceNumber(),
             child: CustomNetworkImage(
               url: superhero.url,
               size: urlSize,

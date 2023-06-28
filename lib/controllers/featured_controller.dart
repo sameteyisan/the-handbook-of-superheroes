@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
+import 'package:the_handbook_of_superheroes/utils/helper.dart';
 import 'package:the_handbook_of_superheroes/widgets/modals/yes_no_modal.dart';
 
 class FeaturedController extends GetxController {
@@ -85,7 +86,8 @@ class FeaturedController extends GetxController {
 
     HomeController.to.featuredHeroes.value = featured;
 
-    EasyLoading.dismiss();
+    Helper.showToast("The process completed successfully.");
+
     Get.back();
   }
 }
