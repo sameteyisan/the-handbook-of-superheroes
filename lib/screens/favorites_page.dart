@@ -28,7 +28,9 @@ class FavoritesPage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Obx(
               () => controller.heroes.isEmpty
-                  ? const EmptyWidget()
+                  ? const EmptyWidget(
+                      text:
+                          "The superheroes you have added to your favorites will be displayed here.")
                   : ListView(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       physics: const BouncingScrollPhysics(),
