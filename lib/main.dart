@@ -49,14 +49,20 @@ class MyApp extends StatelessWidget {
         title: "The Handbook of Superheroes",
         themeMode: ThemeMode.dark,
         theme: ThemeData(
-          scaffoldBackgroundColor: CColors.backgroundcolor,
-          useMaterial3: true,
-          appBarTheme: AppBarTheme(
-            centerTitle: true,
-            backgroundColor: CColors.foregroundBlack,
-            titleTextStyle: Styles.title,
-          ),
-        ),
+            scaffoldBackgroundColor: CColors.backgroundcolor,
+            useMaterial3: true,
+            appBarTheme: AppBarTheme(
+              centerTitle: true,
+              backgroundColor: CColors.foregroundBlack,
+              titleTextStyle: Styles.title,
+            ),
+            sliderTheme: const SliderThemeData(
+              overlayShape: RoundSliderThumbShape(enabledThumbRadius: 4, elevation: 0),
+              inactiveTrackColor: CColors.sideColor,
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
+              thumbColor: Colors.transparent,
+              rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 4, elevation: 0),
+            )),
         // initialBinding: GlobalBindings(),
         home: child,
         routes: const {},

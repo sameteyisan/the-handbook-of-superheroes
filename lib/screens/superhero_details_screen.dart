@@ -6,6 +6,7 @@ import 'package:the_handbook_of_superheroes/controllers/superhero_details_contro
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/center_loading.dart';
+import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_ink_well.dart';
@@ -70,7 +71,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(24),
                           ),
                           child: Text(
-                            "Compare",
+                            "Add to Compare",
                             style: TextStyle(
                               color: CColors.textColor,
                               fontSize: 17.sp,
@@ -143,12 +144,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                                 .map((kv) => DetailPanel(kv: kv)),
                           ],
                         )),
-              Obx(
-                () => AnimatedContainer(
-                  duration: 300.milliseconds,
-                  height: homeController.versusHeroes.isNotEmpty ? 250.h : 32,
-                ),
-              ),
+              const CompareSize(),
             ],
           ),
           if (showCompare) const CompareWidget(),

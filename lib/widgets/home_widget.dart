@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
+import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
 import 'package:the_handbook_of_superheroes/widgets/placeholder_superhero_card.dart';
@@ -108,12 +109,7 @@ class HomeWidget extends GetView<HomeController> {
                   ),
           ),
         ),
-        Obx(
-          () => AnimatedContainer(
-            duration: 300.milliseconds,
-            height: controller.versusHeroes.isNotEmpty ? 250.h : 32,
-          ),
-        ),
+        const CompareSize(),
       ],
     );
   }

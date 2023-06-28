@@ -22,6 +22,7 @@ class SuperheroCard extends StatelessWidget {
     this.iconSize,
     this.heroAnimation = true,
     this.addLastHeroes = true,
+    this.touchable = true,
   });
 
   final BasicHeroModel superhero;
@@ -31,11 +32,13 @@ class SuperheroCard extends StatelessWidget {
   final double? iconSize;
   final bool heroAnimation;
   final bool addLastHeroes;
+  final bool touchable;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        if (!touchable) return;
         extraOnTap?.call();
         Get.to(SuperheroesDetailsScreen(
           hero: superhero,

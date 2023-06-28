@@ -6,6 +6,7 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/screens/admin_screen.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
@@ -79,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                         Obx(
                           () => AnimatedSize(
                             duration: 300.milliseconds,
-                            child: controller.searchText.value.isNotEmpty
+                            child: controller.superheroes.isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.only(left: 8),
                                     child: CustomIconButton(
@@ -140,12 +141,7 @@ class HomeScreen extends StatelessWidget {
                                   .toList(),
                             ),
                           ),
-                          Obx(
-                            () => AnimatedContainer(
-                              duration: 300.milliseconds,
-                              height: controller.versusHeroes.isNotEmpty ? 250.h : 32,
-                            ),
-                          ),
+                          const CompareSize(),
                         ],
                       );
                     }),

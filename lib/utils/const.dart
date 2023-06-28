@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class Const {
-  static const apiUrl = "https://superheroapi.com/api/10167700845705177";
-
   static final powerstatColors = <String, Color>{
     'intelligence': CColors.mainColor,
     'strength': Colors.red,

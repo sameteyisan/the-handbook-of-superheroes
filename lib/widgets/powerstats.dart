@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
-import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class PowerStats extends StatelessWidget {
   const PowerStats({super.key, required this.kv});
@@ -50,14 +50,7 @@ class PowerStats extends StatelessWidget {
                     Expanded(
                       child: SliderTheme(
                         data: SliderTheme.of(context).copyWith(
-                          overlayShape: const RoundSliderThumbShape(
-                            enabledThumbRadius: 4,
-                          ),
                           activeTrackColor: Const.powerstatColors[kv.key],
-                          inactiveTrackColor: CColors.sideColor,
-                          thumbShape: const RoundSliderThumbShape(
-                            enabledThumbRadius: 0.0,
-                          ),
                         ),
                         child: Slider(
                           value: ((int.tryParse(kv.value) ?? 0) / 100),

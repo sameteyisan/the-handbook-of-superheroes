@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
+import 'package:the_handbook_of_superheroes/screens/compare_screeen.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/custom_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/placeholder_superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
 
@@ -45,7 +47,7 @@ class CompareWidget extends GetView<HomeController> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "Versus Heroes",
+                          "Compare Heroes",
                           style: Styles.title
                               .copyWith(fontWeight: FontWeight.bold, letterSpacing: 1.5),
                         ),
@@ -90,6 +92,23 @@ class CompareWidget extends GetView<HomeController> {
                                 height: 150,
                               ),
                           ],
+                        ),
+                        AnimatedSize(
+                          duration: 300.milliseconds,
+                          child: controller.versusHeroes.length >= 2
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 16, right: 16, top: 16, bottom: 8),
+                                  child: CustomButton(
+                                    text: "Compare",
+                                    onPressed: controller.versusHeroes.length >= 2
+                                        ? () => Get.to(
+                                              ComprateScreen(heros: controller.versusHeroes),
+                                            )
+                                        : null,
+                                  ),
+                                )
+                              : const SizedBox(width: double.infinity),
                         )
                       ],
                     ),

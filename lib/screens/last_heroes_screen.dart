@@ -61,7 +61,7 @@ class LastHeroesScreen extends StatelessWidget {
                           Obx(
                             () => AnimatedContainer(
                               duration: 300.milliseconds,
-                              height: HomeController.to.versusHeroes.isNotEmpty ? 250.h : 32,
+                              height: HomeController.to.versusHeroes.isNotEmpty ? 300.h : 32,
                             ),
                           ),
                         ]),

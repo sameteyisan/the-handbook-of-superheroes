@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
+import 'package:the_handbook_of_superheroes/models/powerstat.dart';
 import 'package:the_handbook_of_superheroes/models/superhero.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
 
@@ -13,6 +14,16 @@ class Api {
       return SuperheroModel.fromMap(res.data()!);
     } catch (e) {
       debugPrint('Get Superhero Details Error : $e');
+      return null;
+    }
+  }
+
+  static Future<PowerstatModel?> getPowerstats(String id) async {
+    try {
+      final res = await firestore.collection("powerstats").doc(id).get();
+      return PowerstatModel.fromMap(res.data()!);
+    } catch (e) {
+      debugPrint('Get Powerstats Heroes Error : $e');
       return null;
     }
   }

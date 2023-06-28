@@ -10,3 +10,9 @@ extension StringX on String {
     return split("-").map((e) => e.titleCase).join(" ");
   }
 }
+
+extension DoubleX on double {
+  double get fract => this - floor();
+
+  String get convert => fract == 0 ? '${round()}' : toStringAsFixed(1);
+}
