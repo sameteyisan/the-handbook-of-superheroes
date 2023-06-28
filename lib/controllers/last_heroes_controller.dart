@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/utils/helper.dart';
 import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
@@ -26,6 +27,7 @@ class LastHeroesController extends GetxController {
       final box = Hive.box("last-heroes");
       box.deleteAll(box.keys);
       heroes.clear();
+      HomeController.to.lastHeroes.clear();
       Helper.showToast("The cleaning process is successful.");
     }
   }
@@ -36,6 +38,7 @@ class LastHeroesController extends GetxController {
       final box = Hive.box("last-heroes");
       box.delete(id);
       heroes.removeWhere((e) => e.id == id);
+      HomeController.to.lastHeroes.removeWhere((e) => e.id == id);
       Helper.showToast("The deletion was successful.");
     }
   }

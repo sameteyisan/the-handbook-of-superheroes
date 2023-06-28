@@ -15,9 +15,11 @@ import 'package:the_handbook_of_superheroes/widgets/powerstats.dart';
 import 'package:the_handbook_of_superheroes/widgets/title_widget.dart';
 
 class SuperheroesDetailsScreen extends StatelessWidget {
-  const SuperheroesDetailsScreen({super.key, required this.hero, this.isCard = true});
+  const SuperheroesDetailsScreen(
+      {super.key, required this.hero, this.isCard = true, this.showCompare = true});
   final BasicHeroModel hero;
   final bool isCard;
+  final bool showCompare;
 
   @override
   Widget build(BuildContext context) {
@@ -41,45 +43,45 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              Obx(
-                () => AnimatedOpacity(
-                  opacity:
-                      homeController.versusHeroes.firstWhereOrNull((e) => e.id == hero.id) == null
-                          ? 1
-                          : 0.2,
-                  duration: 300.milliseconds,
-                  child: Center(
-                    child: CustomInkWell(
-                      radius: 24,
-                      onTap: () => controller.compare(hero),
-                      child: AnimatedContainer(
-                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                        duration: 300.milliseconds,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.6),
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: const Offset(2, 2),
+              if (showCompare)
+                Obx(() {
+                  final isHave =
+                      homeController.versusHeroes.firstWhereOrNull((e) => e.id == hero.id) != null;
+                  return AnimatedOpacity(
+                    opacity: isHave ? 0.2 : 1,
+                    duration: 300.milliseconds,
+                    child: Center(
+                      child: CustomInkWell(
+                        radius: 24,
+                        onTap: isHave ? null : () => controller.compare(hero),
+                        child: AnimatedContainer(
+                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                          duration: 300.milliseconds,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: const Offset(2, 2),
+                              ),
+                            ],
+                            color: CColors.foregroundBlack,
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Text(
+                            "Compare",
+                            style: TextStyle(
+                              color: CColors.textColor,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w500,
                             ),
-                          ],
-                          color: CColors.foregroundBlack,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Text(
-                          "Compare",
-                          style: TextStyle(
-                            color: CColors.textColor,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
+                  );
+                }),
               Obx(() => controller.isLoading.value
                   ? const Padding(
                       padding: EdgeInsets.only(top: 32),
@@ -149,7 +151,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
               ),
             ],
           ),
-          const CompareWidget(),
+          if (showCompare) const CompareWidget(),
         ],
       ),
     );

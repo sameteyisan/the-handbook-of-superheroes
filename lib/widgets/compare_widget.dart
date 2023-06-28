@@ -62,10 +62,7 @@ class CompareWidget extends GetView<HomeController> {
                             ),
                             Stack(
                               children: [
-                                Lottie.asset(
-                                  "assets/lotties/batman.json",
-                                  width: 100.w,
-                                ),
+                                Lottie.asset("assets/lotties/batman.json", width: 100.w),
                                 Positioned.fill(
                                   child: Center(
                                     child: Text(
@@ -82,15 +79,15 @@ class CompareWidget extends GetView<HomeController> {
                             if (controller.versusHeroes.length > 1)
                               SuperheroCard(
                                 superhero: controller.versusHeroes[1],
-                                urlSize: 150.h,
+                                urlSize: 150,
                                 iconSize: 40,
                                 onDeleted: () => controller.versusHeroes.removeAt(1),
                                 heroAnimation: false,
                               )
                             else
                               PlaceholderSuperheroCard(
-                                height: 155.h,
-                                width: 118.w,
+                                width: 112.w,
+                                height: 150,
                               ),
                           ],
                         )

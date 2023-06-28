@@ -75,6 +75,7 @@ class FeaturedScreenn extends StatelessWidget {
                           items: controller.featured
                               .map((hero) => SuperheroCard(
                                     superhero: hero,
+                                    addLastHeroes: false,
                                     onDeleted: () =>
                                         controller.featured.removeWhere((e) => e.id == hero.id),
                                   ))

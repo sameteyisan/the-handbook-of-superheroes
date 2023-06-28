@@ -21,6 +21,7 @@ class SuperheroCard extends StatelessWidget {
     this.urlSize,
     this.iconSize,
     this.heroAnimation = true,
+    this.addLastHeroes = true,
   });
 
   final BasicHeroModel superhero;
@@ -29,19 +30,25 @@ class SuperheroCard extends StatelessWidget {
   final double? urlSize;
   final double? iconSize;
   final bool heroAnimation;
+  final bool addLastHeroes;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
         extraOnTap?.call();
-        Get.to(SuperheroesDetailsScreen(hero: superhero));
-        final box = Hive.box("last-heroes");
-        await Future.delayed(100.milliseconds);
-        await box.delete(superhero.id);
-        HomeController.to.lastHeroes.removeWhere((e) => e.id == superhero.id);
-        box.put(superhero.id, superhero.copyWith(date: DateTime.now()).toJson());
-        HomeController.to.lastHeroes.insert(0, superhero);
+        Get.to(SuperheroesDetailsScreen(
+          hero: superhero,
+          showCompare: addLastHeroes,
+        ));
+        if (addLastHeroes) {
+          final box = Hive.box("last-heroes");
+          await Future.delayed(100.milliseconds);
+          await box.delete(superhero.id);
+          HomeController.to.lastHeroes.removeWhere((e) => e.id == superhero.id);
+          box.put(superhero.id, superhero.copyWith(date: DateTime.now()).toJson());
+          HomeController.to.lastHeroes.insert(0, superhero);
+        }
       },
       child: Stack(
         children: [
