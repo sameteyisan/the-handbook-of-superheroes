@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
@@ -38,7 +39,9 @@ class SuperheroCard extends StatelessWidget {
         final box = Hive.box("last-heroes");
         await Future.delayed(100.milliseconds);
         await box.delete(superhero.id);
-        box.put(superhero.id, superhero.toJson());
+        HomeController.to.lastHeroes.removeWhere((e) => e.id == superhero.id);
+        box.put(superhero.id, superhero.copyWith(date: DateTime.now()).toJson());
+        HomeController.to.lastHeroes.insert(0, superhero);
       },
       child: Stack(
         children: [

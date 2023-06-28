@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
+import 'package:the_handbook_of_superheroes/utils/helper.dart';
+import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
-  // final superhero = Rxn<SuperheroModel>();
+  final lastHeroes = <BasicHeroModel>[].obs;
   final superheroes = <BasicHeroModel>[].obs;
   final featuredHeroes = <BasicHeroModel>[].obs;
   final versusHeroes = <BasicHeroModel>[].obs;
@@ -29,6 +32,15 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
+    final box = Hive.box("last-heroes");
+    for (final key in box.keys) {
+      final value = box.get(key);
+      final hero = BasicHeroModel.fromJson(value);
+      lastHeroes.add(hero);
+    }
+
+    lastHeroes.sort((a, b) => b.date!.millisecondsSinceEpoch - a.date!.millisecondsSinceEpoch);
+
     final deviceID = await getDeviceID();
     print(deviceID);
 
@@ -99,6 +111,16 @@ class HomeController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  void deleteHero(String id) async {
+    final res = await DeleteModal.open();
+    if (res != null) {
+      final box = Hive.box("last-heroes");
+      box.delete(id);
+      lastHeroes.removeWhere((e) => e.id == id);
+      Helper.showToast("The deletion was successful.");
+    }
   }
 
   Future<String> getDeviceID() async {

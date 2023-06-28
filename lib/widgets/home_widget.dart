@@ -4,13 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
-import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
-import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
 import 'package:the_handbook_of_superheroes/widgets/placeholder_superhero_card.dart';
 import 'package:the_handbook_of_superheroes/widgets/superhero_card.dart';
@@ -85,43 +82,30 @@ class HomeWidget extends GetView<HomeController> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ValueListenableBuilder(
-            valueListenable: Hive.box("last-heroes").listenable(),
-            child: const Padding(
-              padding: EdgeInsets.only(top: 32),
-              child: EmptyWidget(),
-            ),
-            builder: (context, box, child) {
-              if (box.isEmpty) {
-                return child!;
-              }
-              return ListView(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                reverse: true,
-                children: box.keys.toList().sublist(0, min(box.keys.length, 3)).map(
-                  (key) {
-                    final superhero = BasicHeroModel.fromJson(box.get(key));
-
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: SuperheroTile(
-                        superhero: superhero,
-                        icon: Ionicons.close,
-                        onDeleted: () async {
-                          final res = await DeleteModal.open();
-                          if (res != null) {
-                            final box = Hive.box("last-heroes");
-                            box.delete(superhero.id);
-                          }
-                        },
-                      ),
-                    );
-                  },
-                ).toList(),
-              );
-            },
+          child: Obx(
+            () => controller.lastHeroes.isEmpty
+                ? const Padding(
+                    padding: EdgeInsets.only(top: 32),
+                    child: EmptyWidget(),
+                  )
+                : ListView(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    children:
+                        controller.lastHeroes.sublist(0, min(controller.lastHeroes.length, 3)).map(
+                      (superhero) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: SuperheroTile(
+                            superhero: superhero,
+                            icon: Ionicons.close,
+                            onDeleted: () => controller.deleteHero(superhero.id),
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
           ),
         ),
         Obx(
