@@ -10,6 +10,9 @@ apk:
 	flutter clean 
 	flutter pub get
 	flutter build apk --split-per-abi
+
+appbundle:
+	flutter clean && flutter build appbundle
 	
 iosfix:
 	rm -rf pubspec.lock ios/Pods ios/Podfile.lock
