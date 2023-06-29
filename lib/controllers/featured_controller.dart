@@ -6,7 +6,7 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
 import 'package:the_handbook_of_superheroes/utils/helper.dart';
-import 'package:the_handbook_of_superheroes/widgets/modals/yes_no_modal.dart';
+import 'package:the_handbook_of_superheroes/widgets/modals/warning_modal.dart';
 
 class FeaturedController extends GetxController {
   final featured = <BasicHeroModel>[].obs;
@@ -58,7 +58,7 @@ class FeaturedController extends GetxController {
 
   void addOrRemove(BasicHeroModel hero, bool isHave) async {
     if (isHave) {
-      final res = await YesNoModal.open(
+      final res = await WarningModal.open(
           "This superhero is already in the featured ones. You want to take it out?");
       if (res != null) {
         featured.removeWhere((e) => e.id == hero.id);

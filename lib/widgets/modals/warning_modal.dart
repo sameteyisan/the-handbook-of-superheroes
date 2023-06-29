@@ -4,9 +4,12 @@ import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/modals/modal_action_buttons.dart';
 
-class YesNoModal extends StatelessWidget {
-  const YesNoModal({Key? key, required this.text}) : super(key: key);
+class WarningModal extends StatelessWidget {
+  const WarningModal({Key? key, required this.text, this.rightText, this.leftText})
+      : super(key: key);
   final String text;
+  final String? rightText;
+  final String? leftText;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +39,8 @@ class YesNoModal extends StatelessWidget {
       ),
       actions: [
         ModalActionButtons(
-          right: "Yes",
-          left: "Cancel",
+          right: rightText ?? "Yes",
+          left: leftText ?? "Cancel",
           onPressedRight: () => Get.back(result: true),
           onPressedLeft: Get.back,
         )
@@ -45,5 +48,14 @@ class YesNoModal extends StatelessWidget {
     );
   }
 
-  static Future<bool?> open(String text) async => await Get.dialog(YesNoModal(text: text));
+  static Future<bool?> open(
+    String text, {
+    String? rightText,
+    String? leftText,
+  }) async =>
+      await Get.dialog(WarningModal(
+        text: text,
+        rightText: rightText,
+        leftText: leftText,
+      ));
 }

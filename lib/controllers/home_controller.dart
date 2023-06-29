@@ -42,7 +42,6 @@ class HomeController extends GetxController {
     lastHeroes.sort((a, b) => b.date!.millisecondsSinceEpoch - a.date!.millisecondsSinceEpoch);
 
     final deviceID = await getDeviceID();
-    print(deviceID);
 
     if (deviceID.isNotEmpty) {
       isAdmin.value = await Api.getAdminData(deviceID);

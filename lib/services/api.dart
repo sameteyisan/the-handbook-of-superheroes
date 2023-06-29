@@ -51,7 +51,7 @@ class Api {
 
       return superheroes.docs.map((e) => BasicHeroModel.fromMap(e.data())).toList();
     } catch (e) {
-      debugPrint('Get Superheros Error : $e');
+      debugPrint('Get All Superheros Error : $e');
       return [];
     }
   }
@@ -89,7 +89,7 @@ class Api {
 
       return data ?? false;
     } catch (e) {
-      debugPrint('Get Featured Heroes Error : $e');
+      debugPrint('Get Admin Data Error : $e');
       return false;
     }
   }
