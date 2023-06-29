@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:the_handbook_of_superheroes/utils/theme.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
+import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class DetailPanel extends StatelessWidget {
   const DetailPanel({super.key, required this.kv});
@@ -59,6 +60,6 @@ class DetailPanel extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ).animate().flip(delay: 400.ms);
   }
 }

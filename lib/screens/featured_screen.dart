@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -23,7 +24,7 @@ class FeaturedScreenn extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           leading: const CustomBackButton(),
-          title: const Text("Featured"),
+          title: const Text("Featured").animate().flip(delay: 100.ms),
           actions: [
             Obx(
               () => controller.featured.length > 2
@@ -34,7 +35,7 @@ class FeaturedScreenn extends StatelessWidget {
                         shadows: Const.shadows,
                         color: CColors.textColor,
                       ),
-                    )
+                    ).animate().flip(delay: 100.ms)
                   : const SizedBox(),
             ),
           ],
@@ -69,8 +70,8 @@ class FeaturedScreenn extends StatelessWidget {
                             height: 260.h,
                             scrollPhysics: const BouncingScrollPhysics(),
                             autoPlay: true,
-                            autoPlayInterval: 5.seconds,
-                            autoPlayAnimationDuration: 1500.milliseconds,
+                            autoPlayInterval: 5000.ms,
+                            autoPlayAnimationDuration: 1500.ms,
                           ),
                           items: controller.featured
                               .map((hero) => SuperheroCard(
@@ -84,7 +85,7 @@ class FeaturedScreenn extends StatelessWidget {
                         crossFadeState: controller.featured.isEmpty
                             ? CrossFadeState.showFirst
                             : CrossFadeState.showSecond,
-                        duration: 1.seconds,
+                        duration: 1000.ms,
                       ),
                     ),
             ),
@@ -102,7 +103,7 @@ class FeaturedScreenn extends StatelessWidget {
                 suffixIcon: Obx(
                   () => AnimatedOpacity(
                     opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
-                    duration: 300.milliseconds,
+                    duration: 300.ms,
                     child: IconButton(
                       onPressed: controller.searchController.clear,
                       icon: Icon(

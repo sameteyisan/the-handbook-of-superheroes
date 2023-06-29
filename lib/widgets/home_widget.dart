@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -31,11 +32,12 @@ class HomeWidget extends GetView<HomeController> {
             firstChild: CarouselSlider(
               key: const PageStorageKey("featured-carousel"),
               items: List.generate(
-                  5,
-                  (index) => const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: PlaceholderSuperheroCard(),
-                      )),
+                5,
+                (index) => const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: PlaceholderSuperheroCard(),
+                ),
+              ),
               options: CarouselOptions(
                 viewportFraction: 0.52,
                 height: 260.h,
@@ -50,21 +52,21 @@ class HomeWidget extends GetView<HomeController> {
                 height: 260.h,
                 scrollPhysics: const BouncingScrollPhysics(),
                 autoPlay: true,
-                autoPlayInterval: 5.seconds,
-                autoPlayAnimationDuration: 1500.milliseconds,
+                autoPlayInterval: 5000.ms,
+                autoPlayAnimationDuration: 1500.ms,
                 onPageChanged: (index, reason) => controller.currentCenter.value = index,
               ),
             ),
             crossFadeState: controller.featuredHeroes.isEmpty
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,
-            duration: 1.seconds,
+            duration: 1000.ms,
           ),
         ),
         const SizedBox(height: 16),
         Obx(
           () => AnimatedScale(
-            duration: 300.milliseconds,
+            duration: 300.ms,
             scale: controller.featuredHeroes.isEmpty ? 0 : 1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

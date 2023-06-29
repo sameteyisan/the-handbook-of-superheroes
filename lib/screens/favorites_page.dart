@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -20,7 +21,7 @@ class FavoritesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
-        title: const Text("Favorites"),
+        title: const Text("Favorites").animate().flip(delay: 100.ms),
       ),
       body: Stack(
         children: [
@@ -54,7 +55,7 @@ class FavoritesPage extends StatelessWidget {
                                     crossFadeState: kv.value.isFavorite != null
                                         ? CrossFadeState.showFirst
                                         : CrossFadeState.showSecond,
-                                    duration: 300.milliseconds,
+                                    duration: 300.ms,
                                   ),
                                 ),
                               );
@@ -62,7 +63,7 @@ class FavoritesPage extends StatelessWidget {
                           ),
                           Obx(
                             () => AnimatedContainer(
-                              duration: 300.milliseconds,
+                              duration: 300.ms,
                               height: HomeController.to.versusHeroes.isNotEmpty ? 300.h : 32,
                             ),
                           ),

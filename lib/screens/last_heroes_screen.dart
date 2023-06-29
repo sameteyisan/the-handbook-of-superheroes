@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -21,7 +22,7 @@ class LastHeroesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
-        title: const Text("Last Heroes you viewed"),
+        title: const Text("Last Heroes you viewed").animate().flip(delay: 100.ms),
         actions: [
           Obx(
             () => controller.heroes.isNotEmpty
@@ -31,7 +32,7 @@ class LastHeroesScreen extends StatelessWidget {
                       Ionicons.trash,
                       color: CColors.textColor,
                     ),
-                  )
+                  ).animate().flip(delay: 100.ms)
                 : const SizedBox(),
           )
         ],
@@ -47,29 +48,30 @@ class LastHeroesScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       physics: const BouncingScrollPhysics(),
                       children: [
-                          ...controller.heroes.map(
-                            (hero) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: SuperheroTile(
-                                  superhero: hero,
-                                  onDeleted: () => controller.deleteHero(hero.id),
-                                  icon: Icon(
-                                    Ionicons.close,
-                                    color: CColors.subtitleColor,
-                                    shadows: Const.shadows,
-                                  ),
+                        ...controller.heroes.map(
+                          (hero) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: SuperheroTile(
+                                superhero: hero,
+                                onDeleted: () => controller.deleteHero(hero.id),
+                                icon: Icon(
+                                  Ionicons.close,
+                                  color: CColors.subtitleColor,
+                                  shadows: Const.shadows,
                                 ),
-                              );
-                            },
+                              ),
+                            ).animate().flip(delay: 200.ms);
+                          },
+                        ),
+                        Obx(
+                          () => AnimatedContainer(
+                            duration: 300.ms,
+                            height: HomeController.to.versusHeroes.isNotEmpty ? 300.h : 32,
                           ),
-                          Obx(
-                            () => AnimatedContainer(
-                              duration: 300.milliseconds,
-                              height: HomeController.to.versusHeroes.isNotEmpty ? 300.h : 32,
-                            ),
-                          ),
-                        ]),
+                        ),
+                      ],
+                    ),
             ),
           ),
           const CompareWidget(),

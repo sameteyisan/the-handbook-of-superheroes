@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -32,7 +33,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
-        title: Text(hero.name),
+        title: Text(hero.name).animate().flip(delay: 100.ms),
       ),
       body: Stack(
         children: [
@@ -40,10 +41,7 @@ class SuperheroesDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             children: [
               Center(
-                child: Hero(
-                  tag: "hero${isCard ? "card" : "tile"}-${hero.id}",
-                  child: CustomNetworkImage(url: hero.url),
-                ),
+                child: CustomNetworkImage(url: hero.url).animate().flipH(delay: 200.ms),
               ),
               const SizedBox(height: 16),
               Row(
@@ -57,14 +55,14 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                                 null;
                         return AnimatedOpacity(
                           opacity: isHave ? 0.2 : 1,
-                          duration: 300.milliseconds,
+                          duration: 300.ms,
                           child: Center(
                             child: CustomInkWell(
                               radius: 24,
                               onTap: isHave ? null : () => controller.compare(hero),
                               child: AnimatedContainer(
                                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                                duration: 300.milliseconds,
+                                duration: 300.ms,
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
@@ -109,13 +107,13 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                         crossFadeState: controller.isFavorite.value
                             ? CrossFadeState.showFirst
                             : CrossFadeState.showSecond,
-                        duration: 300.milliseconds,
+                        duration: 300.ms,
                       ),
                     ),
                     onTap: () => controller.favoriteToggle(hero),
                   )
                 ],
-              ),
+              ).animate().flip(delay: 300.ms),
               Obx(() => controller.isLoading.value
                   ? const Padding(
                       padding: EdgeInsets.only(top: 32),

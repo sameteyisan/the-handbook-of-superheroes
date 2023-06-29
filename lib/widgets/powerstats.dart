@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/utils/extentions.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
@@ -70,6 +71,6 @@ class PowerStats extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ).animate().flip(delay: 400.ms);
   }
 }

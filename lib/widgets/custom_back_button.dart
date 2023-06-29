@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/route_manager.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
@@ -14,6 +15,6 @@ class CustomBackButton extends StatelessWidget {
         size: 32,
       ),
       onPressed: Get.back,
-    );
+    ).animate().flip(delay: 100.ms);
   }
 }

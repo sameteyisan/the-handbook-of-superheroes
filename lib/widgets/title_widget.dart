@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class TitleWidget extends StatelessWidget {
@@ -34,6 +35,6 @@ class TitleWidget extends StatelessWidget {
             ),
           )
       ],
-    );
+    ).animate().flip(delay: 200.ms);
   }
 }

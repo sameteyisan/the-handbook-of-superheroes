@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/controllers/compare_controller.dart';
@@ -22,7 +23,7 @@ class ComprateScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
-        title: const Text("Comparison Status"),
+        title: const Text("Comparison Status").animate().flip(delay: 100.ms),
       ),
       body: ListView(
         children: [
@@ -31,17 +32,20 @@ class ComprateScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: heros
-                  .map(
-                    (e) => Column(
-                      children: [
-                        SuperheroCard(
-                          superhero: e,
-                          urlSize: Get.width * 0.5,
-                          touchable: false,
-                        ),
-                      ],
-                    ),
-                  )
+                  .asMap()
+                  .entries
+                  .map((kv) => Column(
+                        children: [
+                          SuperheroCard(
+                            superhero: kv.value,
+                            urlSize: Get.width * 0.5,
+                            touchable: false,
+                          )
+                              .animate()
+                              .slideX(begin: kv.key % 2 == 0 ? -3 : 3, delay: 200.ms)
+                              .shake(delay: 600.ms)
+                        ],
+                      ))
                   .toList(),
             ),
           ),
@@ -162,7 +166,7 @@ class ComprateScreen extends StatelessWidget {
                                                   : (100 + double.parse(secondKey)),
                                             ),
                                             onChanged: (_) {},
-                                          ),
+                                          ).animate().flip(delay: 800.ms),
                                         ),
                                         Center(
                                           child: Container(
@@ -187,7 +191,7 @@ class ComprateScreen extends StatelessWidget {
                               const SizedBox(height: 8),
                             ],
                           ),
-                        );
+                        ).animate().flip(delay: 300.ms);
                       },
                     ).toList(),
                   ),

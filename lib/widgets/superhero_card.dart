@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -7,7 +8,6 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
-import 'package:the_handbook_of_superheroes/utils/helper.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_icon_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_network_image.dart';
@@ -46,7 +46,7 @@ class SuperheroCard extends StatelessWidget {
         ));
         if (addLastHeroes) {
           final box = Hive.box("last-heroes");
-          await Future.delayed(100.milliseconds);
+          await Future.delayed(100.ms);
           await box.delete(superhero.id);
           HomeController.to.lastHeroes.removeWhere((e) => e.id == superhero.id);
           box.put(superhero.id, superhero.copyWith(date: DateTime.now()).toJson());
@@ -55,12 +55,9 @@ class SuperheroCard extends StatelessWidget {
       },
       child: Stack(
         children: [
-          Hero(
-            tag: heroAnimation ? "herocard-${superhero.id}" : Helper.generateNonceNumber(),
-            child: CustomNetworkImage(
-              url: superhero.url,
-              size: urlSize,
-            ),
+          CustomNetworkImage(
+            url: superhero.url,
+            size: urlSize,
           ),
           Positioned.fill(
             child: Align(
@@ -106,6 +103,6 @@ class SuperheroCard extends StatelessWidget {
             ),
         ],
       ),
-    );
+    ).animate().flip(delay: 100.ms);
   }
 }

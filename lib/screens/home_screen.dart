@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -37,10 +38,10 @@ class HomeScreen extends StatelessWidget {
                         shadows: Const.shadows,
                         color: CColors.subtitleColor,
                       ),
-                    )
+                    ).animate().flip(delay: 100.ms)
                   : const SizedBox(),
             ),
-            title: const Text("The Handbook of Superheroes"),
+            title: const Text("The Handbook of Superheroes").animate().flip(delay: 100.ms),
             actions: [
               IconButton(
                 onPressed: () => Get.to(const FavoritesPage()),
@@ -49,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                   shadows: Const.shadows,
                   color: CColors.textColor,
                 ),
-              ),
+              ).animate().flip(delay: 100.ms)
             ],
           ),
           body: Stack(
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                             suffixIcon: Obx(
                               () => AnimatedOpacity(
                                 opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
-                                duration: 300.milliseconds,
+                                duration: 300.ms,
                                 child: IconButton(
                                   onPressed: controller.searchController.clear,
                                   icon: Icon(
@@ -85,11 +86,11 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             onFieldSubmitted: (_) => controller.search(),
-                          ),
+                          ).animate().flip(delay: 100.ms),
                         ),
                         Obx(
                           () => AnimatedSize(
-                            duration: 300.milliseconds,
+                            duration: 300.ms,
                             child: controller.superheroes.isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.only(left: 8),
@@ -109,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                                         crossFadeState: controller.isDescending.value
                                             ? CrossFadeState.showSecond
                                             : CrossFadeState.showFirst,
-                                        duration: 500.milliseconds,
+                                        duration: 500.ms,
                                       ),
                                       onTap: controller.isDescending.toggle,
                                     ),

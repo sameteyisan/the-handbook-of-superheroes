@@ -35,14 +35,11 @@ class SuperheroTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Hero(
-              tag: "herotile-${superhero.id}",
-              child: CustomNetworkImage(
-                url: superhero.url,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  bottomLeft: Radius.circular(24),
-                ),
+            CustomNetworkImage(
+              url: superhero.url,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                bottomLeft: Radius.circular(24),
               ),
             ),
             const SizedBox(width: 16),
