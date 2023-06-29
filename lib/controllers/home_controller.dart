@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
@@ -28,7 +29,7 @@ class HomeController extends GetxController {
 
   final currentCenter = 0.obs;
 
-  // CancelToken? canceler;
+  final bannerAd = Rxn<BannerAd>();
 
   @override
   void onInit() async {
@@ -54,26 +55,15 @@ class HomeController extends GetxController {
     ever(isDescending, (_) => search());
 
     ever(searchText, (name) async {
-      // isLoading.value = true;
       if (name.isEmpty) {
         superheroes.clear();
         isLoading.value = false;
         isSearching.value = false;
         return;
       }
-      // canceler?.cancel();
-      // canceler = CancelToken();
-      // final res = await Api.getSuperheros(name, canceler!);
-      // if (res == null) {
-      //   return;
-      // }
-      // superheroes.value = res;
-      // isLoading.value = false;
     });
 
-    // superhero.value = await Api.getSuperhero("2"); // between 0 and 732
-
-    // isLoading.value = false;
+    bannerAd.value = Helper.getAd;
 
     super.onInit();
   }
@@ -83,6 +73,7 @@ class HomeController extends GetxController {
     searchController.removeListener(listener);
 
     searchController.dispose();
+    bannerAd.value?.dispose();
     // canceler?.cancel();
     super.onClose();
   }

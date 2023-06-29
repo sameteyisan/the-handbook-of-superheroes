@@ -7,6 +7,7 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/controllers/last_heroes_controller.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/ads_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/custom_back_button.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
@@ -48,8 +49,13 @@ class LastHeroesScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       physics: const BouncingScrollPhysics(),
                       children: [
-                        ...controller.heroes.map(
-                          (hero) {
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.heroes.length,
+                          itemBuilder: (context, index) {
+                            final hero = controller.heroes[index];
+
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 16),
                               child: SuperheroTile(
@@ -62,6 +68,21 @@ class LastHeroesScreen extends StatelessWidget {
                                 ),
                               ),
                             ).animate().flip(delay: 200.ms);
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            if (index != 0 && index % 6 == 0) {
+                              return Obx(() => AnimatedSize(
+                                    duration: 300.microseconds,
+                                    child: controller.bannerAds[index] != null
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(top: 16, bottom: 32),
+                                            child:
+                                                AdsWidget(bannerAd: controller.bannerAds[index]!),
+                                          )
+                                        : const SizedBox(),
+                                  ));
+                            }
+                            return const SizedBox();
                           },
                         ),
                         Obx(

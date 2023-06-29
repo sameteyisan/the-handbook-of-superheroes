@@ -7,6 +7,7 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/controllers/superhero_details_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/ads_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/center_loading.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_widget.dart';
@@ -114,6 +115,15 @@ class SuperheroesDetailsScreen extends StatelessWidget {
                   )
                 ],
               ).animate().flip(delay: 300.ms),
+              Obx(() => AnimatedSize(
+                    duration: 300.microseconds,
+                    child: controller.bannerAd.value != null
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: AdsWidget(bannerAd: controller.bannerAd.value!),
+                          )
+                        : const SizedBox(),
+                  )),
               Obx(() => controller.isLoading.value
                   ? const Padding(
                       padding: EdgeInsets.only(top: 32),

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive/hive.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
@@ -7,6 +8,8 @@ import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
 
 class LastHeroesController extends GetxController {
   final heroes = <BasicHeroModel>[].obs;
+
+  final bannerAds = <BannerAd?>[].obs;
 
   @override
   void onInit() {
@@ -18,6 +21,14 @@ class LastHeroesController extends GetxController {
     }
 
     heroes.sort((a, b) => b.date!.millisecondsSinceEpoch - a.date!.millisecondsSinceEpoch);
+
+    for (int i = 0; i < heroes.length; i++) {
+      if (i != 0 && i % 6 == 0) {
+        bannerAds.add(Helper.getAd);
+      } else {
+        bannerAds.add(null);
+      }
+    }
     super.onInit();
   }
 

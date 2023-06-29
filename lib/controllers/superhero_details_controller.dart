@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:the_handbook_of_superheroes/controllers/favorites_controller.dart';
 import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
@@ -13,6 +14,8 @@ class SuperheroDetailsController extends GetxController {
   final isLoading = false.obs;
   final isFavorite = false.obs;
 
+  final bannerAd = Rxn<BannerAd>();
+
   String id;
   SuperheroDetailsController(this.id);
   @override
@@ -22,7 +25,15 @@ class SuperheroDetailsController extends GetxController {
     isFavorite.value = res != null;
 
     fetch();
+
+    bannerAd.value = Helper.getAd;
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    bannerAd.value?.dispose();
+    super.onClose();
   }
 
   void fetch() async {

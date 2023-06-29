@@ -27,6 +27,10 @@ dependencies:
   device_info_plus: ^9.0.2
   shimmer: ^3.0.0
   flutter_animate: ^4.2.0
+  google_mobile_ads: ^3.0.0
+
+dependency_overrides:
+  webview_flutter_wkwebview: '3.5.0'
 
 dev_dependencies:
   flutter_test:

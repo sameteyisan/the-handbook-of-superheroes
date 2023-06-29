@@ -10,6 +10,7 @@ import 'package:the_handbook_of_superheroes/controllers/home_controller.dart';
 import 'package:the_handbook_of_superheroes/screens/last_heroes_screen.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
+import 'package:the_handbook_of_superheroes/widgets/ads_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/compare_size.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
 import 'package:the_handbook_of_superheroes/widgets/page_indicator.dart';
@@ -79,6 +80,15 @@ class HomeWidget extends GetView<HomeController> {
           ),
         ),
         const SizedBox(height: 32),
+        Obx(() => AnimatedSize(
+              duration: 300.microseconds,
+              child: controller.bannerAd.value != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(bottom: 32),
+                      child: AdsWidget(bannerAd: controller.bannerAd.value!),
+                    )
+                  : const SizedBox(),
+            )),
         TitleWidget(
           "Last Heroes you viewed",
           tPadding: 16,

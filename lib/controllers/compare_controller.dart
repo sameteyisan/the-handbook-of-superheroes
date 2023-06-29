@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/models/powerstat.dart';
@@ -25,6 +27,10 @@ class CompareController extends GetxController {
     }
 
     isLoading.value = false;
+
+    final rnd = Random().nextBool();
+    if (rnd) Helper.showAd;
+
     super.onInit();
   }
 
