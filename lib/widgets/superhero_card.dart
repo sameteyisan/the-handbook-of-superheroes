@@ -40,10 +40,8 @@ class SuperheroCard extends StatelessWidget {
       onTap: () async {
         if (!touchable) return;
         extraOnTap?.call();
-        Get.to(SuperheroesDetailsScreen(
-          hero: superhero,
-          showCompare: addLastHeroes,
-        ));
+        Get.to(SuperheroesDetailsScreen(hero: superhero, showCompare: addLastHeroes));
+
         if (addLastHeroes) {
           final box = Hive.box("last-heroes");
           await Future.delayed(100.ms);

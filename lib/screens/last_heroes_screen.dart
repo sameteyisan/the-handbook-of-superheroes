@@ -67,7 +67,7 @@ class LastHeroesScreen extends StatelessWidget {
                                   shadows: Const.shadows,
                                 ),
                               ),
-                            ).animate().flip(delay: 200.ms);
+                            );
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             if (index != 0 && index % 6 == 0) {
