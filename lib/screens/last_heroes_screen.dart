@@ -60,7 +60,7 @@ class LastHeroesScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 16),
                               child: SuperheroTile(
                                 superhero: hero,
-                                onDeleted: () => controller.deleteHero(hero.id),
+                                onDeleted: () => controller.removeHero(hero.id),
                                 icon: Icon(
                                   Ionicons.close,
                                   color: CColors.subtitleColor,

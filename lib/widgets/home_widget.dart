@@ -119,7 +119,7 @@ class HomeWidget extends GetView<HomeController> {
                               color: CColors.subtitleColor,
                               shadows: Const.shadows,
                             ),
-                            onDeleted: () => controller.deleteHero(superhero.id),
+                            onDeleted: () => controller.removeHero(superhero.id),
                           ),
                         );
                       },

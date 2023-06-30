@@ -8,7 +8,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
 import 'package:the_handbook_of_superheroes/utils/helper.dart';
-import 'package:the_handbook_of_superheroes/widgets/modals/delete_modal.dart';
+import 'package:the_handbook_of_superheroes/widgets/modals/warning_modal.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
@@ -104,13 +104,13 @@ class HomeController extends GetxController {
     return true;
   }
 
-  void deleteHero(String id) async {
-    final res = await DeleteModal.open();
+  void removeHero(String id) async {
+    final res = await WarningModal.open("Are you sure you want to remove this superhero?");
     if (res != null) {
       final box = Hive.box("last-heroes");
       box.delete(id);
       lastHeroes.removeWhere((e) => e.id == id);
-      Helper.showToast("The deletion was successful.");
+      Helper.showToast("Successfully removed.");
     }
   }
 
