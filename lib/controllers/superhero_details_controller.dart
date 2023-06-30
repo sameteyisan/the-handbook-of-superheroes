@@ -32,7 +32,7 @@ class SuperheroDetailsController extends GetxController {
 
   @override
   void onClose() {
-    // bannerAd.value?.dispose();
+    bannerAd.value?.dispose();
     bannerAd.value = null;
     super.onClose();
   }

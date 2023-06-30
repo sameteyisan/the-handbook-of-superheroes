@@ -32,6 +32,14 @@ class LastHeroesController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    for (final ad in bannerAds) {
+      ad?.dispose();
+    }
+    super.onClose();
+  }
+
   void deleteAll() async {
     final res = await DeleteModal.open(text: "Are you sure you want the whole thing deleted?");
     if (res != null) {

@@ -74,6 +74,7 @@ class HomeController extends GetxController {
 
     searchController.dispose();
     bannerAd.value?.dispose();
+    bannerAd.value = null;
     // canceler?.cancel();
     super.onClose();
   }
