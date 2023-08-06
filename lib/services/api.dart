@@ -45,7 +45,7 @@ class Api {
     }
   }
 
-  static Future<List<BasicHeroModel>> getallSuperheros() async {
+  static Future<List<BasicHeroModel>> getAllSuperheros() async {
     try {
       final superheroes = await firestore.collection("heroes").get();
 
@@ -66,9 +66,23 @@ class Api {
     }
   }
 
-  static Future<void> deleteFeaturedHeroes(BasicHeroModel hero) async {
+  static Future<void> deleteFeaturedHero(BasicHeroModel hero) async {
     try {
       await firestore.collection("featured").doc(hero.id).delete();
+    } catch (e) {
+      debugPrint('Delete Featured Hero Error : $e');
+    }
+  }
+
+  static Future<void> deleteFeaturedHeroes() async {
+    try {
+      final batch = firestore.batch();
+      final collection = firestore.collection('featured');
+      final snapshots = await collection.get();
+      for (final doc in snapshots.docs) {
+        batch.delete(doc.reference);
+      }
+      await batch.commit();
     } catch (e) {
       debugPrint('Delete Featured Heroes Error : $e');
     }

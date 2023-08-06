@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -71,14 +70,7 @@ class FeaturedController extends GetxController {
   void save() async {
     EasyLoading.show(maskType: EasyLoadingMaskType.clear);
 
-    final instance = FirebaseFirestore.instance;
-    final batch = instance.batch();
-    final collection = instance.collection('featured');
-    final snapshots = await collection.get();
-    for (final doc in snapshots.docs) {
-      batch.delete(doc.reference);
-    }
-    await batch.commit();
+    await Api.deleteFeaturedHeroes();
 
     for (final hero in featured) {
       await Api.setFeaturedHeroes(hero);
@@ -86,8 +78,8 @@ class FeaturedController extends GetxController {
 
     HomeController.to.featuredHeroes.value = featured;
 
-    Helper.showToast("The process completed successfully.");
-
     Get.back();
+
+    Helper.showToast("The process completed successfully.");
   }
 }
