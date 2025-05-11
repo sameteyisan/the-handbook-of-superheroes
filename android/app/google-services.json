@@ -2,22 +2,17 @@
   "project_info": {
     "project_number": "661546037404",
     "project_id": "the-handbook-of-superheroes",
-    "storage_bucket": "the-handbook-of-superheroes.appspot.com"
+    "storage_bucket": "the-handbook-of-superheroes.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:661546037404:android:dce9e96ec4456d3101fd59",
+        "mobilesdk_app_id": "1:661546037404:android:0ef686ff50543f2f01fd59",
         "android_client_info": {
           "package_name": "com.SandE.the_handbook_of_superheroes"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "661546037404-82d3p59glf0o825trqu73k44hlb3dr7c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyArSftvtdgpggo8qlJPLJk23shy1rx94P4"
@@ -25,12 +20,26 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "661546037404-82d3p59glf0o825trqu73k44hlb3dr7c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661546037404:android:dce9e96ec4456d3101fd59",
+        "android_client_info": {
+          "package_name": "com.example.the_handbook_of_superheroes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArSftvtdgpggo8qlJPLJk23shy1rx94P4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

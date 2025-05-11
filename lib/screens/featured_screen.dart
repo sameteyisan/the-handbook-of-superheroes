@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_handbook_of_superheroes/controllers/featured_controller.dart';
@@ -22,13 +21,14 @@ class FeaturedScreenn extends StatelessWidget {
     final controller = Get.put(FeaturedController());
 
     return Scaffold(
-        appBar: AppBar(
-          leading: const CustomBackButton(),
-          title: const Text("Featured").animate().flip(delay: 100.ms),
-          actions: [
-            Obx(
-              () => controller.featured.length > 2
-                  ? IconButton(
+      appBar: AppBar(
+        leading: const CustomBackButton(),
+        title: const Text("Featured").animate().flip(delay: 100.ms),
+        actions: [
+          Obx(
+            () =>
+                controller.featured.length > 2
+                    ? IconButton(
                       onPressed: controller.save,
                       icon: Icon(
                         Ionicons.save_outline,
@@ -36,29 +36,31 @@ class FeaturedScreenn extends StatelessWidget {
                         color: CColors.textColor,
                       ),
                     ).animate().flip(delay: 100.ms)
-                  : const SizedBox(),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            const SizedBox(height: 16),
-            Obx(
-              () => !controller.isLoading.value && controller.featured.isEmpty
-                  ? const EmptyWidget(text: "There is no superhero that featured.")
-                  : Obx(
+                    : const SizedBox(),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 16),
+          Obx(
+            () =>
+                !controller.isLoading.value && controller.featured.isEmpty
+                    ? const EmptyWidget(text: "There is no superhero that featured.")
+                    : Obx(
                       () => AnimatedCrossFade(
                         firstChild: CarouselSlider(
                           key: const PageStorageKey("featured-carousel"),
                           items: List.generate(
-                              3,
-                              (index) => const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 12),
-                                    child: PlaceholderSuperheroCard(),
-                                  )),
+                            3,
+                            (index) => const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12),
+                              child: PlaceholderSuperheroCard(),
+                            ),
+                          ),
                           options: CarouselOptions(
                             viewportFraction: 0.52,
-                            height: 260.h,
+                            height: 260,
                             scrollPhysics: const BouncingScrollPhysics(),
                           ),
                         ),
@@ -67,91 +69,95 @@ class FeaturedScreenn extends StatelessWidget {
                           options: CarouselOptions(
                             viewportFraction: 0.52,
                             enableInfiniteScroll: false,
-                            height: 260.h,
+                            height: 260,
                             scrollPhysics: const BouncingScrollPhysics(),
                             autoPlay: true,
                             autoPlayInterval: 5000.ms,
                             autoPlayAnimationDuration: 1500.ms,
                           ),
-                          items: controller.featured
-                              .map((hero) => SuperheroCard(
-                                    superhero: hero,
-                                    addLastHeroes: false,
-                                    onDeleted: () =>
-                                        controller.featured.removeWhere((e) => e.id == hero.id),
-                                  ))
-                              .toList(),
+                          items:
+                              controller.featured
+                                  .map(
+                                    (hero) => SuperheroCard(
+                                      superhero: hero,
+                                      addLastHeroes: false,
+                                      onDeleted:
+                                          () => controller.featured.removeWhere(
+                                            (e) => e.id == hero.id,
+                                          ),
+                                    ),
+                                  )
+                                  .toList(),
                         ),
-                        crossFadeState: controller.featured.isEmpty
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
+                        crossFadeState:
+                            controller.featured.isEmpty
+                                ? CrossFadeState.showFirst
+                                : CrossFadeState.showSecond,
                         duration: 1000.ms,
                       ),
                     ),
-            ),
-            const SizedBox(height: 32),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: CustomTextField(
-                controller: controller.searchController,
-                hintText: "Search Superhero",
-                prefixIcon: Icon(
-                  Ionicons.search,
-                  color: CColors.textColor,
-                  shadows: Const.shadows,
-                ),
-                suffixIcon: Obx(
-                  () => AnimatedOpacity(
-                    opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
-                    duration: 300.ms,
-                    child: IconButton(
-                      onPressed: controller.searchController.clear,
-                      icon: Icon(
-                        Ionicons.close,
-                        color: CColors.subtitleColor,
-                        shadows: Const.shadows,
-                      ),
-                      splashRadius: 20.sp,
+          ),
+          const SizedBox(height: 32),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: CustomTextField(
+              controller: controller.searchController,
+              hintText: "Search Superhero",
+              prefixIcon: Icon(Ionicons.search, color: CColors.textColor, shadows: Const.shadows),
+              suffixIcon: Obx(
+                () => AnimatedOpacity(
+                  opacity: controller.searchText.value.isNotEmpty ? 1 : 0,
+                  duration: 300.ms,
+                  child: IconButton(
+                    onPressed: controller.searchController.clear,
+                    icon: Icon(
+                      Ionicons.close,
+                      color: CColors.subtitleColor,
+                      shadows: Const.shadows,
                     ),
+                    splashRadius: 20,
                   ),
                 ),
-                onFieldSubmitted: (_) => controller.fetch(),
+              ),
+              onFieldSubmitted: (_) => controller.fetch(),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Obx(
+                () =>
+                    controller.superheroes.isEmpty
+                        ? const EmptyWidget(text: "Pick a superhero now.")
+                        : ListView(
+                          shrinkWrap: true,
+                          children:
+                              controller.superheroes.map((e) {
+                                final isHave =
+                                    controller.featured
+                                        .where((p0) => p0.id == e.id)
+                                        .toList()
+                                        .isNotEmpty;
+
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: SuperheroTile(
+                                    superhero: e,
+                                    icon: Icon(
+                                      Ionicons.checkmark,
+                                      color: isHave ? CColors.mainColor : CColors.subtitleColor,
+                                      shadows: Const.shadows,
+                                    ),
+                                    onDeleted: () => controller.addOrRemove(e, isHave),
+                                  ),
+                                );
+                              }).toList(),
+                        ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Obx(
-                  () => controller.superheroes.isEmpty
-                      ? const EmptyWidget(text: "Pick a superhero now.")
-                      : ListView(
-                          shrinkWrap: true,
-                          children: controller.superheroes.map(
-                            (e) {
-                              final isHave = controller.featured
-                                  .where((p0) => p0.id == e.id)
-                                  .toList()
-                                  .isNotEmpty;
-
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: SuperheroTile(
-                                  superhero: e,
-                                  icon: Icon(
-                                    Ionicons.checkmark,
-                                    color: isHave ? CColors.mainColor : CColors.subtitleColor,
-                                    shadows: Const.shadows,
-                                  ),
-                                  onDeleted: () => controller.addOrRemove(e, isHave),
-                                ),
-                              );
-                            },
-                          ).toList(),
-                        ),
-                ),
-              ),
-            )
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

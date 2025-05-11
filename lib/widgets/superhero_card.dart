@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:ionicons/ionicons.dart';
@@ -53,18 +52,15 @@ class SuperheroCard extends StatelessWidget {
       },
       child: Stack(
         children: [
-          CustomNetworkImage(
-            url: superhero.url,
-            size: urlSize,
-          ),
+          CustomNetworkImage(url: superhero.url, size: urlSize),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                height: 56.h,
+                height: 56,
                 decoration: BoxDecoration(
-                  color: CColors.backgroundcolor.withOpacity(0.6),
+                  color: CColors.backgroundcolor.withValues(alpha: 0.6),
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(24),
                     bottomRight: Radius.circular(24),
@@ -89,12 +85,8 @@ class SuperheroCard extends StatelessWidget {
                   child: CustomIconButton(
                     size: iconSize,
                     onTap: onDeleted,
-                    backgroundColor: CColors.foregroundBlack.withOpacity(0.9),
-                    icon: Icon(
-                      Ionicons.trash,
-                      color: CColors.textColor,
-                      shadows: Const.shadows,
-                    ),
+                    backgroundColor: CColors.foregroundBlack.withValues(alpha: 0.9),
+                    icon: Icon(Ionicons.trash, color: CColors.textColor, shadows: Const.shadows),
                   ),
                 ),
               ),

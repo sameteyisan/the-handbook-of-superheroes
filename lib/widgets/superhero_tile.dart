@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
 import 'package:the_handbook_of_superheroes/screens/superhero_details_screen.dart';
@@ -24,10 +23,7 @@ class SuperheroTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(SuperheroesDetailsScreen(
-        hero: superhero,
-        isCard: false,
-      )),
+      onTap: () => Get.to(SuperheroesDetailsScreen(hero: superhero, isCard: false)),
       child: Container(
         height: 100,
         decoration: BoxDecoration(
@@ -47,21 +43,15 @@ class SuperheroTile extends StatelessWidget {
             Expanded(
               child: Text(
                 superhero.name,
-                style: Styles.title.copyWith(
-                  letterSpacing: 1.5,
-                  fontSize: 17.sp,
-                ),
+                style: Styles.title.copyWith(letterSpacing: 1.5, fontSize: 17),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: IconButton(
-                onPressed: onDeleted,
-                icon: icon,
-              ),
-            )
+              child: IconButton(onPressed: onDeleted, icon: icon),
+            ),
           ],
         ),
       ),

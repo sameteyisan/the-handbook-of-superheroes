@@ -1,6 +1,5 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/empty_widget.dart';
@@ -15,7 +14,7 @@ class CustomNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExtendedImage.network(
       url,
-      height: (size ?? Get.width * 0.7).w,
+      height: (size ?? Get.width * 0.7),
       fit: BoxFit.cover,
       filterQuality: FilterQuality.high,
       cache: true,
@@ -26,10 +25,7 @@ class CustomNetworkImage extends StatelessWidget {
         if (state.extendedImageLoadState == LoadState.failed) {
           return SizedBox(
             width: double.infinity,
-            child: EmptyWidget(
-              size: Get.width * 0.2,
-              text: "No Image",
-            ),
+            child: EmptyWidget(size: Get.width * 0.2, text: "No Image"),
           );
         }
         return null;

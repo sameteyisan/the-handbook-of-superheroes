@@ -32,7 +32,7 @@ class ShimmerWrapper extends StatelessWidget {
                   direction: direction,
                   period: duration ?? 2.seconds,
                   baseColor: Colors.transparent,
-                  highlightColor: CColors.textColor.withOpacity(0.2),
+                  highlightColor: CColors.textColor.withValues(alpha: 0.2),
                   child: Container(
                     color: Colors.black,
                   ),

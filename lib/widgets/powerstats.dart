@@ -22,7 +22,7 @@ class PowerStats extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: CColors.iconColor.withOpacity(0.5),
+                  color: CColors.iconColor.withValues(alpha: 0.5),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
                     bottomLeft: Radius.circular(8),

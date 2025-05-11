@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyArSftvtdgpggo8qlJPLJk23shy1rx94P4',
-    appId: '1:661546037404:android:dce9e96ec4456d3101fd59',
+    appId: '1:661546037404:android:0ef686ff50543f2f01fd59',
     messagingSenderId: '661546037404',
     projectId: 'the-handbook-of-superheroes',
-    storageBucket: 'the-handbook-of-superheroes.appspot.com',
+    storageBucket: 'the-handbook-of-superheroes.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCbXmi85m_i2aNjC6FpaY4YSDrC4DIdXac',
-    appId: '1:661546037404:ios:6b65d1a6ad501ac401fd59',
+    appId: '1:661546037404:ios:83afc52b879b93d901fd59',
     messagingSenderId: '661546037404',
     projectId: 'the-handbook-of-superheroes',
-    storageBucket: 'the-handbook-of-superheroes.appspot.com',
-    iosClientId: '661546037404-r3a3g2dlhl4cnaovclllorrao5n643a3.apps.googleusercontent.com',
+    storageBucket: 'the-handbook-of-superheroes.firebasestorage.app',
     iosBundleId: 'com.SandE.theHandbookOfSuperheroes',
   );
+
 }

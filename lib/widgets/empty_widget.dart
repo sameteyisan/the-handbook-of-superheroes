@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
@@ -23,7 +22,7 @@ class EmptyWidget extends StatelessWidget {
         const SizedBox(height: 16),
         Text(
           text ?? "The superheroes you last visited are displayed here.",
-          style: Styles.title.copyWith(fontSize: 17.sp),
+          style: Styles.title.copyWith(fontSize: 17),
           textAlign: TextAlign.center,
         ),
       ],

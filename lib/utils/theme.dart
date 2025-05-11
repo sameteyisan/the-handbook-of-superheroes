@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CColors {
   static const mainColor = Color(0xff0078D4);
@@ -31,21 +30,12 @@ class CColors {
 }
 
 class Styles {
-  static TextStyle get title => TextStyle(
-        fontSize: 19.sp,
-        fontWeight: FontWeight.w500,
-        color: CColors.textColor,
-      );
+  static TextStyle get title =>
+      const TextStyle(fontSize: 19, fontWeight: FontWeight.w500, color: CColors.textColor);
 
-  static TextStyle get subtitle => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w300,
-        color: CColors.textColor,
-      );
+  static TextStyle get subtitle =>
+      const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: CColors.textColor);
 
-  static TextStyle get bigTitle => TextStyle(
-        fontSize: 23.sp,
-        fontWeight: FontWeight.bold,
-        color: CColors.textColor,
-      );
+  static TextStyle get bigTitle =>
+      const TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: CColors.textColor);
 }

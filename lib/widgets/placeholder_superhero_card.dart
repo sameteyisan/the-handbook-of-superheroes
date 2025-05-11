@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 import 'package:the_handbook_of_superheroes/widgets/shimmer_wrapper.dart';
@@ -17,7 +16,7 @@ class PlaceholderSuperheroCard extends StatelessWidget {
         children: [
           Container(
             width: width,
-            height: (height ?? Get.width * 0.7).w,
+            height: (height ?? Get.width * 0.7),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
               color: CColors.foregroundBlack,
@@ -28,10 +27,10 @@ class PlaceholderSuperheroCard extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                height: 56.h,
+                height: 56,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: CColors.backgroundcolor.withOpacity(0.6),
+                  color: CColors.backgroundcolor.withValues(alpha: 0.6),
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(24),
                     bottomRight: Radius.circular(24),

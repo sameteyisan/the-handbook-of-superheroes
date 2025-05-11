@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:the_handbook_of_superheroes/models/basic_hero.dart';
+import 'package:the_handbook_of_superheroes/screens/compare_screeen.dart';
 import 'package:the_handbook_of_superheroes/services/api.dart';
 import 'package:the_handbook_of_superheroes/utils/helper.dart';
 import 'package:the_handbook_of_superheroes/widgets/modals/warning_modal.dart';
@@ -124,5 +125,12 @@ class HomeController extends GetxController {
       return androidDeviceInfo.id;
     }
     return "";
+  }
+
+  void compare() {
+    final heros = versusHeroes.map((e) => e.copyWith()).toList();
+    versusHeroes.clear();
+
+    Get.to(ComprateScreen(heros: heros));
   }
 }

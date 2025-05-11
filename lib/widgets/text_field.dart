@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -77,10 +76,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Ink(
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
+      decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(16)),
       child: TextFormField(
         inputFormatters: inputFormatters,
         focusNode: focusNode,
@@ -99,7 +95,7 @@ class CustomTextField extends StatelessWidget {
         autofocus: autoFocus,
         textAlign: textAlign,
         onTap: onTap,
-        style: style ?? TextStyle(color: CColors.textColor, fontSize: 15.sp),
+        style: style ?? const TextStyle(color: CColors.textColor, fontSize: 15),
         onFieldSubmitted: onFieldSubmitted,
         keyboardType: keyboardType,
         readOnly: readOnly,
@@ -112,10 +108,10 @@ class CustomTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           hintText: hintText,
           suffixText: suffixText,
-          hintStyle: hintStyle ?? TextStyle(fontSize: 15.sp, color: CColors.subtitleColor),
+          hintStyle: hintStyle ?? const TextStyle(fontSize: 15, color: CColors.subtitleColor),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: borderColor, width: 0.5.w),
+            borderSide: BorderSide(color: borderColor, width: 0.5),
           ),
           focusedBorder: OutlineInputBorder(
             gapPadding: 8,

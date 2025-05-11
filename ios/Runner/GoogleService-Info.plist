@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>661546037404-r3a3g2dlhl4cnaovclllorrao5n643a3.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.661546037404-r3a3g2dlhl4cnaovclllorrao5n643a3</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCbXmi85m_i2aNjC6FpaY4YSDrC4DIdXac</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +13,7 @@
 	<key>PROJECT_ID</key>
 	<string>the-handbook-of-superheroes</string>
 	<key>STORAGE_BUCKET</key>
-	<string>the-handbook-of-superheroes.appspot.com</string>
+	<string>the-handbook-of-superheroes.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:661546037404:ios:6b65d1a6ad501ac401fd59</string>
+	<string>1:661546037404:ios:83afc52b879b93d901fd59</string>
 </dict>
 </plist>

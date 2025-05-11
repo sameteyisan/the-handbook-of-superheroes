@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_handbook_of_superheroes/utils/const.dart';
 import 'package:the_handbook_of_superheroes/utils/theme.dart';
@@ -29,21 +28,22 @@ class AdminCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
-              colors: invertColors
-                  ? [
-                      CColors.foregroundBlack.withOpacity(0.6),
-                      CColors.foregroundBlack.withOpacity(0.4),
-                      CColors.foregroundBlack,
-                    ]
-                  : [
-                      CColors.foregroundBlack,
-                      CColors.foregroundBlack.withOpacity(0.4),
-                      CColors.foregroundBlack.withOpacity(0.6),
-                    ],
+              colors:
+                  invertColors
+                      ? [
+                        CColors.foregroundBlack.withValues(alpha: 0.6),
+                        CColors.foregroundBlack.withValues(alpha: 0.4),
+                        CColors.foregroundBlack,
+                      ]
+                      : [
+                        CColors.foregroundBlack,
+                        CColors.foregroundBlack.withValues(alpha: 0.4),
+                        CColors.foregroundBlack.withValues(alpha: 0.6),
+                      ],
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha: 0.6),
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: const Offset(0.0, 0.0),
@@ -53,17 +53,9 @@ class AdminCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                color: CColors.subtitleColor,
-                shadows: Const.shadows,
-                size: 28.sp,
-              ),
+              Icon(icon, color: CColors.subtitleColor, shadows: Const.shadows, size: 28),
               const SizedBox(height: 4),
-              Text(
-                title.tr,
-                style: Styles.bigTitle.copyWith(letterSpacing: 1.4),
-              )
+              Text(title.tr, style: Styles.bigTitle.copyWith(letterSpacing: 1.4)),
             ],
           ),
         ),
